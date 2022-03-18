@@ -4,9 +4,9 @@ import java.util.Calendar;
 
 public class MotorCycle extends Vehicle {
     private Integer fare;
-    public MotorCycle(String placa, Calendar horaLLegada, Calendar horaSalida, Integer fare) {
-        super(placa, horaLLegada, horaSalida);
-        this.fare = fare;
+
+    public MotorCycle(String licensePlate, Calendar checkin, Calendar checkout) {
+        super(licensePlate, checkin, checkout);
     }
 
     public Integer getFare() {

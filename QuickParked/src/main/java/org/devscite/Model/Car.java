@@ -6,11 +6,10 @@ public class Car extends Vehicle {
     private Integer fare;
     private CarModel carModel;
 
-    public Car(String placa, Calendar horaLLegada, Calendar horaSalida, Integer fare, CarModel carModel ) {
-        super(placa, horaLLegada, horaSalida);
-        this.fare = fare;
-        this.carModel = carModel;
+    public Car(String licensePlate, Calendar checkin, Calendar checkout) {
+        super(licensePlate, checkin, checkout);
     }
+
 
     public Integer getFare() {
         return fare;
