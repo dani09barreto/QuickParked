@@ -1,13 +1,17 @@
 package org.devscite.Model;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.UUID;
 
-public class Vehicle {
+public abstract class Vehicle {
+    protected UUID idVehicle;
     protected String licensePlate;
     protected Calendar checkin;
     protected Calendar checkout;
 
     public Vehicle(String licensePlate, Calendar checkin, Calendar checkout) {
+        this.idVehicle = UUID.randomUUID();
         this.licensePlate = licensePlate;
         this.checkin = checkin;
         this.checkout = checkout;
@@ -21,16 +25,18 @@ public class Vehicle {
         this.licensePlate = licensePlate;
     }
 
-    public Calendar getCheckin() {
-        return checkin;
+    public String getCheckin() {
+        SimpleDateFormat date = new SimpleDateFormat("hh:mm:ss");
+        return date.format(checkin.getTime());
     }
 
     public void setCheckin(Calendar checkin) {
         this.checkin = checkin;
     }
 
-    public Calendar getCheckout() {
-        return checkout;
+    public String getCheckout() {
+        SimpleDateFormat date = new SimpleDateFormat("hh:mm:ss");
+        return date.format(checkout.getTime());
     }
 
     public void setCheckout(Calendar checkout) {
