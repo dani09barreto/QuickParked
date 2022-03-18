@@ -17,6 +17,10 @@ public abstract class Vehicle {
         this.checkout = checkout;
     }
 
+    public UUID getIdVehicle() {
+        return idVehicle;
+    }
+
     public String getLicensePlate() {
         return licensePlate;
     }
