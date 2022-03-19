@@ -29,21 +29,21 @@ public abstract class Vehicle {
         this.licensePlate = licensePlate;
     }
 
-    public String getCheckin() {
-        SimpleDateFormat date = new SimpleDateFormat("hh:mm:ss");
-        return date.format(checkin.getTime());
+    public Calendar getCheckin() {
+        return checkin;
+    }
+
+    public Calendar getCheckout() {
+        return checkout;
     }
 
     public void setCheckin(Calendar checkin) {
         this.checkin = checkin;
     }
 
-    public String getCheckout() {
-        SimpleDateFormat date = new SimpleDateFormat("hh:mm:ss");
-        return date.format(checkout.getTime());
-    }
-
     public void setCheckout(Calendar checkout) {
         this.checkout = checkout;
     }
+
+    public abstract Integer calculatePrace ();
 }
