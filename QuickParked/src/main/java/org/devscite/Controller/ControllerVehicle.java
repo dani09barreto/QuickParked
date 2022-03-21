@@ -16,20 +16,31 @@ public class ControllerVehicle {
     public Map<String, Vehicle> getPaidVehiclelist() {
         return paidVehiclelist;
     }
+
+    public void setVehiclelist(Map<String, Vehicle> vehiclelist) {
+        this.vehiclelist = vehiclelist;
+    }
+
+    public void setPaidVehiclelist(Map<String, Vehicle> paidVehiclelist) {
+        this.paidVehiclelist = paidVehiclelist;
+    }
+
     public Vehicle vehicleExist (String licensePlate){
         if (vehiclelist.containsKey(licensePlate)){
             return vehiclelist.get(licensePlate);
         }
         return null;
     }
-    public void addVehiclePaid (Vehicle vehicle){
+    public Map<String, Vehicle> addVehiclePaid (Vehicle vehicle){
         if (!paidVehiclelist.containsKey(vehicle.getLicensePlate())){
             paidVehiclelist.put(vehicle.getLicensePlate(), vehicle);
         }
+        return this.paidVehiclelist;
     }
-    public void eliminateVehicle (String licencePlate){
+    public Map<String, Vehicle> eliminateVehicle (String licencePlate){
         if (vehiclelist.containsKey(licencePlate)){
             vehiclelist.remove(licencePlate);
         }
+        return this.vehiclelist;
     }
 }

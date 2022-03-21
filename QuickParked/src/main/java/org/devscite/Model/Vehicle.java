@@ -1,6 +1,5 @@
 package org.devscite.Model;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.UUID;
 
@@ -9,12 +8,12 @@ public abstract class Vehicle {
     protected String licensePlate;
     protected Calendar checkin;
     protected Calendar checkout;
+    protected long price;
 
-    public Vehicle(String licensePlate, Calendar checkin, Calendar checkout) {
+    public Vehicle(String licensePlate, Calendar checkin) {
         this.idVehicle = UUID.randomUUID();
         this.licensePlate = licensePlate;
         this.checkin = checkin;
-        this.checkout = checkout;
     }
 
     public UUID getIdVehicle() {
@@ -45,5 +44,17 @@ public abstract class Vehicle {
         this.checkout = checkout;
     }
 
-    public abstract Integer calculatePrace ();
+    public void setIdVehicle(UUID idVehicle) {
+        this.idVehicle = idVehicle;
+    }
+
+    public long getPrice() {
+        return price;
+    }
+
+    public void setPrice(long price) {
+        this.price = price;
+    }
+
+    public abstract void calculatePrace ();
 }
