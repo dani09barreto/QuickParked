@@ -18,11 +18,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="1092.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devscite.View.Controller.ControllerViewParking">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="609.0" prefWidth="1147.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devscite.View.Controller.ControllerViewParking">
    <top>
       <AnchorPane prefHeight="46.0" prefWidth="1009.0" style="-fx-background-color: #1190CB;" styleClass="top-bar" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="1045.0" layoutY="11.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFFFF; -fx-background-radius: 10;">
+            <Button layoutX="1100.0" layoutY="11.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFFFF; -fx-background-radius: 10;">
                <graphic>
                   <ImageView fitHeight="17.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -45,7 +45,7 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <Label layoutX="934.0" layoutY="13.0" text="Cerrar Sesión" textFill="WHITE">
+            <Label layoutX="1000.0" layoutY="13.0" text="Cerrar Sesión" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
@@ -104,21 +104,22 @@
                </children>
             </AnchorPane>
             <Separator layoutX="334.0" orientation="VERTICAL" prefHeight="560.0" prefWidth="0.0" />
-            <AnchorPane layoutX="334.0" prefHeight="560.0" prefWidth="761.0">
+            <AnchorPane layoutX="334.0" prefHeight="563.0" prefWidth="814.0">
                <children>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="559.0" prefWidth="760.0" styleClass="rigth-bar">
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="564.0" prefWidth="814.0" styleClass="rigth-bar">
                      <children>
-                        <ScrollPane layoutX="43.0" layoutY="88.0" prefHeight="408.0" prefWidth="676.0">
+                        <ScrollPane layoutX="28.0" layoutY="88.0" prefHeight="407.0" prefWidth="772.0">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="414.0" prefWidth="673.0">
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="413.0" prefWidth="716.0">
                                  <children>
-                                    <TableView fx:id="tableVehicle" layoutY="-6.0" prefHeight="418.0" prefWidth="770.0">
+                                    <TableView fx:id="tableVehicle" prefHeight="404.0" prefWidth="762.0">
                                        <columns>
+                                          <TableColumn fx:id="columVehicle" prefWidth="116.0" text="Vehiculo" />
                                           <TableColumn fx:id="columCarModel" prefWidth="130.0" text="Tipo Vehiculo" />
-                                          <TableColumn fx:id="columLicensePlate" prefWidth="132.0" text="Placa" />
-                                          <TableColumn fx:id="columCheckin" prefWidth="153.0" text="Hora De Ingreso" />
-                                          <TableColumn fx:id="columFare" prefWidth="116.0" text="Tarifa" />
-                                          <TableColumn fx:id="columPlace" prefWidth="130.0" text="Lugar" />
+                                          <TableColumn fx:id="columLicensePlate" prefWidth="110.0" text="Placa" />
+                                          <TableColumn fx:id="columCheckin" prefWidth="154.0" text="Hora De Ingreso" />
+                                          <TableColumn fx:id="columFare" minWidth="0.0" prefWidth="132.0" text="Tarifa" />
+                                          <TableColumn fx:id="columPlace" minWidth="0.0" prefWidth="119.0" text="Lugar" />
                                        </columns>
                                     </TableView>
                                  </children>
