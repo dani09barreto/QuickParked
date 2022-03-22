@@ -112,13 +112,13 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="414.0" prefWidth="673.0">
                                  <children>
-                                    <TableView layoutY="-6.0" prefHeight="418.0" prefWidth="770.0">
+                                    <TableView fx:id="tableVehicle" layoutY="-6.0" prefHeight="418.0" prefWidth="770.0">
                                        <columns>
-                                          <TableColumn prefWidth="130.0" text="Tipo Vehiculo" />
-                                          <TableColumn prefWidth="132.0" text="Placa" />
-                                          <TableColumn prefWidth="153.0" text="Hora De Ingreso" />
-                                          <TableColumn prefWidth="116.0" text="Tarifa" />
-                                          <TableColumn prefWidth="130.0" text="Lugar" />
+                                          <TableColumn fx:id="columCarModel" prefWidth="130.0" text="Tipo Vehiculo" />
+                                          <TableColumn fx:id="columLicensePlate" prefWidth="132.0" text="Placa" />
+                                          <TableColumn fx:id="columCheckin" prefWidth="153.0" text="Hora De Ingreso" />
+                                          <TableColumn fx:id="columFare" prefWidth="116.0" text="Tarifa" />
+                                          <TableColumn fx:id="columPlace" prefWidth="130.0" text="Lugar" />
                                        </columns>
                                     </TableView>
                                  </children>

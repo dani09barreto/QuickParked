@@ -9,6 +9,7 @@ public abstract class Vehicle {
     protected Calendar checkin;
     protected Calendar checkout;
     protected long price;
+    protected Integer parkingPlace;
 
     public Vehicle(String licensePlate, Calendar checkin) {
         this.idVehicle = UUID.randomUUID();
@@ -54,6 +55,14 @@ public abstract class Vehicle {
 
     public void setPrice(long price) {
         this.price = price;
+    }
+
+    public Integer getParkingPlace() {
+        return parkingPlace;
+    }
+
+    public void setParkingPlace(Integer parkingPlace) {
+        this.parkingPlace = parkingPlace;
     }
 
     public abstract void calculatePrace ();
