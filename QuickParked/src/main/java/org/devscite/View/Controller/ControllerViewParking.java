@@ -6,10 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.devscite.Controller.ControllerParking;
@@ -28,6 +25,24 @@ public class ControllerViewParking{
     private final static String STYLE_SHEET_NAME = "../styles.css";
     private final static String WINDOW_NAME = "Generar Pago";
     private ControllerParking controllerParking = new ControllerParking();
+
+    @FXML
+    private TableColumn<?, ?> columCarModel;
+
+    @FXML
+    private TableColumn<?, ?> columCheckin;
+
+    @FXML
+    private TableColumn<?, ?> columFare;
+
+    @FXML
+    private TableColumn<?, ?> columLicensePlate;
+
+    @FXML
+    private TableColumn<?, ?> columPlace;
+
+    @FXML
+    private TableView<?> tableVehicle;
     @FXML
     private Button btnAdd;
 
