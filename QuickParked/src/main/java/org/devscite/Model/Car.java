@@ -7,8 +7,8 @@ public class Car extends Vehicle {
     private Integer fare;
     private CarModel carModel;
 
-    public Car(String licensePlate, Calendar checkin, Calendar checkout, CarModel carModel) {
-        super(licensePlate, checkin, checkout);
+    public Car(String licensePlate, Calendar checkin, CarModel carModel) {
+        super(licensePlate, checkin);
         this.carModel = carModel;
         if (this.carModel == CarModel.Automovil){
             this.fare = 40;
@@ -40,14 +40,25 @@ public class Car extends Vehicle {
         this.carModel = carModel;
     }
 
+    public CarModel getCarModel() {
+        return carModel;
+    }
+
+    public void setCarModel(CarModel carModel) {
+        this.carModel = carModel;
+    }
+
     @Override
-    public Integer calculatePrace() {
+    public void calculatePrace() {
         this.checkout = Calendar.getInstance();
         Long dateinMils = this.checkin.getTimeInMillis();
-        Long dateOutMils = this.checkin.getTimeInMillis();
-        Integer minuts = (int) (Math.abs(dateOutMils - dateinMils)/ (1000*60));
-        Integer prace = this.fare * minuts;
-        return prace;
+        System.out.println(dateinMils);
+        Long dateOutMils = this.checkout.getTimeInMillis();
+        System.out.println(dateOutMils);
+        long minuts = (dateOutMils - dateinMils) / 60000;
+        System.out.println(minuts);
+        long prace = this.fare * minuts;
+        this.price = prace;
     }
 
     @Override
@@ -60,7 +71,6 @@ public class Car extends Vehicle {
                 "idVehicle:" + idVehicle + "\n"+
                 "placa" + licensePlate + "\n"+
                 "hora ingreso" + timein.format(checkin.getTime()) + "\n"+
-                "hora salida" + timeout.format(checkin.getTime()) + "\n" +
-                "Precio: " + calculatePrace();
+                "Precio: " + this.price;
     }
 }

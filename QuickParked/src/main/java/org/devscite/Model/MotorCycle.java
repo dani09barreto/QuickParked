@@ -6,8 +6,8 @@ import java.util.Calendar;
 public class MotorCycle extends Vehicle {
     private Integer fare;
 
-    public MotorCycle(String licensePlate, Calendar checkin, Calendar checkout) {
-        super(licensePlate, checkin, checkout);
+    public MotorCycle(String licensePlate, Calendar checkin) {
+        super(licensePlate, checkin);
         this.fare = 30;
     }
 
@@ -20,13 +20,13 @@ public class MotorCycle extends Vehicle {
     }
 
     @Override
-    public Integer calculatePrace() {
+    public void calculatePrace() {
         this.checkout = Calendar.getInstance();
         Long dateinMils = this.checkin.getTimeInMillis();
-        Long dateOutMils = this.checkin.getTimeInMillis();
+        Long dateOutMils = this.checkout.getTimeInMillis();
         Integer minuts = (int) (Math.abs(dateOutMils - dateinMils)/ (1000*60));
         Integer prace = this.fare * minuts;
-        return prace;
+        this.price = prace;
     }
     @Override
     public String toString() {
@@ -37,7 +37,7 @@ public class MotorCycle extends Vehicle {
                 "idVehicle:" + idVehicle + "\n"+
                 "placa" + licensePlate + "\n"+
                 "hora ingreso" + timein.format(checkin.getTime()) + "\n"+
-                "hora salida" + timeout.format(checkin.getTime()) + "\n";
+                "Precio: " + this.price;
     }
 
 }
