@@ -1,0 +1,13 @@
+.search-bar{
+    -fx-background-color: #FFFFFFFF;
+    -fx-background-radius: 100;
+}
+.top-bar{
+    -fx-effect: dropShadow(three-pass-box, rgba(0,0,0,0.1), 0.0, 10.0);
+}
+.rigth-bar{
+    -fx-background-color: #F0F0F0;
+}
+.left-bar{
+    -fx-background-color: #E8E8E8;
+}

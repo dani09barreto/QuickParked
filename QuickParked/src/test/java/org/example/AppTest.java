@@ -1,4 +1,4 @@
-package org.devscite;
+package org.example;
 
 import static org.junit.Assert.assertTrue;
 
