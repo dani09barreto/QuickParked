@@ -1,6 +1,9 @@
 package org.devscite.Model;
 
+import org.devscite.Utils.Exeptions.InvalidLicensePlate;
+
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.UUID;
 
 public abstract class Vehicle {
@@ -11,11 +14,22 @@ public abstract class Vehicle {
     protected long price;
     protected Integer parkingPlace;
 
-    public Vehicle(String licensePlate, Calendar checkin) {
+    public Vehicle(String licensePlate, Calendar checkin) throws InvalidLicensePlate {
+        // Check if plate is correct
+        if (!this.checkPlate(licensePlate)) {
+            throw new InvalidLicensePlate(licensePlate);
+        }
         this.idVehicle = UUID.randomUUID();
-        this.licensePlate = licensePlate;
+        this.licensePlate = licensePlate.toUpperCase();
         this.checkin = checkin;
     }
+
+    /**
+     * @param licensePlate LicensePlate to check
+     * @return True if valid
+     * @brief Checks if a plate is valid, should be overriden by Vehicles types
+     */
+    protected abstract boolean checkPlate(String licensePlate);
 
     public UUID getIdVehicle() {
         return idVehicle;
@@ -65,5 +79,5 @@ public abstract class Vehicle {
         this.parkingPlace = parkingPlace;
     }
 
-    public abstract void calculatePrace ();
+    public abstract void calculatePrace();
 }
