@@ -29,7 +29,7 @@ public abstract class Vehicle {
      * @return True if valid
      * @brief Checks if a plate is valid, should be overriden by Vehicles types
      */
-    protected abstract boolean checkPlate(String licensePlate);
+    public abstract boolean checkPlate(String licensePlate);
 
     public UUID getIdVehicle() {
         return idVehicle;
