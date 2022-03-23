@@ -81,7 +81,33 @@ public class ControllerViewPayment {
     }
     @FXML
     void payServiceText(ActionEvent event) {
-        payService(event);
+        //se recibe la placa
+        String licensePlate = textLicensePlate.getText();
+        //se crea la instancia de la placa
+        Vehicle vehicle = controllerParking.getControllerVehicle().vehicleExist(licensePlate);
+        try {
+            if (vehicle == null){
+                throw new VehicleNotExist("el vehiculo no existe");
+            }
+            //se crean las nuevas listas de vehiculos y vehiculos pagos ya que hay que hay que mandarlas al controllerViewPayment
+            Map<String, Vehicle> payVehicleslistTemp = controllerParking.getControllerVehicle().addVehiclePaid(vehicle);
+            Map<String, Vehicle> vehicleslistTemp = controllerParking.getControllerVehicle().eliminateVehicle(vehicle.getLicensePlate());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ParkedScene.fxml"));
+            Parent root = (Parent) loader.load();
+            ControllerViewParking controllerPayment = loader.getController();
+            controllerPayment.getControllerParking().getControllerVehicle().setPaidVehiclelist(payVehicleslistTemp);
+            controllerPayment.getControllerParking().getControllerVehicle().setVehiclelist(vehicleslistTemp);
+
+        }catch (VehicleNotExist e){
+            e.getMessage();
+            AlertUtils.alertError("Error", "Error el vehiculos solicitado no existe", "Pruebe con otra Placa");
+        }
+        catch (Exception e){
+            e.getMessage();
+        }
+        Integer value = Integer.valueOf(textValue.getText());
+        AlertUtils.alertConfirmation("Pago realizado", "El pago del Vehiculo con placas: "+ vehicle.getLicensePlate()+ "fue exitoso\n"+ "Cambio: "+ (value - vehicle.getPrice()),"");
+        ((Stage) (((TextField) event.getSource()).getScene().getWindow())).close();
     }
 
     @FXML
