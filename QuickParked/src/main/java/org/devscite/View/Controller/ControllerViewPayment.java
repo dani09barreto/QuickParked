@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import org.devscite.Controller.ControllerParking;
 import org.devscite.Model.Car;
 import org.devscite.Model.Vehicle;
@@ -17,6 +18,7 @@ import java.util.Map;
 
 public class ControllerViewPayment {
     private ControllerParking controllerParking = new ControllerParking();
+
     @FXML
     private Button btnBack;
 
@@ -48,6 +50,11 @@ public class ControllerViewPayment {
     private TextField textValue;
 
     @FXML
+    void searchLicensePlate(ActionEvent event) {
+        searchVehicle(event);
+    }
+
+    @FXML
     void searchVehicle(ActionEvent event) {
         SimpleDateFormat timein = new SimpleDateFormat("hh:mm:ss");
         SimpleDateFormat timeout = new SimpleDateFormat("hh:mm:ss");
@@ -71,6 +78,10 @@ public class ControllerViewPayment {
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
+    }
+    @FXML
+    void payServiceText(ActionEvent event) {
+        payService(event);
     }
 
     @FXML
@@ -98,11 +109,12 @@ public class ControllerViewPayment {
         }
         Integer value = Integer.valueOf(textValue.getText());
         AlertUtils.alertConfirmation("Pago realizado", "El pago del Vehiculo con placas: "+ vehicle.getLicensePlate()+ "fue exitoso\n"+ "Cambio: "+ (value - vehicle.getPrice()),"");
+        ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
     }
 
     @FXML
     void back(ActionEvent event) {
-
+        ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
     }
 
     public ControllerParking getControllerParking() {
