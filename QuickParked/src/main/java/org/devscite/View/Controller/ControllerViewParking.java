@@ -17,16 +17,18 @@ import org.devscite.Utils.AlertUtils;
 import org.devscite.Utils.Exeptions.InvalidLicensePlate;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Objects;
-
+import java.util.ResourceBundle;
 import static java.awt.SystemColor.control;
 
 public class ControllerViewParking {
 
     private final static String ICON_NAME = "../img/Logo3.png";
     private final static String MAIN_FXML_NAME = "../Aditionalsfmxl/PaymentScene.fxml";
+    private final static String MODIFY_FXML_NAME = "../Aditionalsfmxl/ModifyScene.fxml";
     private final static String STYLE_SHEET_NAME = "../styles.css";
     private final static String WINDOW_NAME = "Generar Pago";
     private ControllerParking controllerParking = new ControllerParking();
@@ -56,6 +58,9 @@ public class ControllerViewParking {
     private Button btnGeneratePayment;
 
     @FXML
+    private Button btnModify;
+
+    @FXML
     private MenuButton carModel;
 
     @FXML
@@ -63,6 +68,11 @@ public class ControllerViewParking {
 
     @FXML
     private ToggleGroup type_vehicle;
+
+
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
 
     @FXML
     private RadioButton selectedCar;
@@ -100,6 +110,29 @@ public class ControllerViewParking {
     }
 
     @FXML
+    void modifyVehicle(ActionEvent event) throws InvalidLicensePlate {
+        ControllerParking controllerParking = new ControllerParking();
+        Vehicle car = new Car("GZT546", Calendar.getInstance(), CarModel.Camioneta);
+        controllerParking.getControllerVehicle().getVehiclelist().put(car.getLicensePlate(), car);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(MODIFY_FXML_NAME));
+            Parent root = (Parent) loader.load();
+            ControllerModifyVehicle controllerModify = loader.getController();
+            controllerModify.getControllerParking().getControllerVehicle().setVehiclelist(controllerParking.getControllerVehicle().getVehiclelist());
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            scene.getStylesheets().add(getClass().getResource(STYLE_SHEET_NAME).toExternalForm());
+            stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream(ICON_NAME))));
+            stage.setTitle(WINDOW_NAME);
+            stage.setScene(scene);
+            stage.setMaximized(false);
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
     void insertCar(ActionEvent event) {
         // Obtener el tipo de vehículo
         Vehicle new_vehicle;
@@ -134,8 +167,6 @@ public class ControllerViewParking {
         // Borrar el campo de datos
         textLicensePlate.clear();
     }
-
-
     public ControllerParking getControllerParking() {
         return controllerParking;
     }
