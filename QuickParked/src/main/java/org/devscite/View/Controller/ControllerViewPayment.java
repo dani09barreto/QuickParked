@@ -89,7 +89,7 @@ public class ControllerViewPayment {
             if (vehicle == null){
                 throw new VehicleNotExist("el vehiculo no existe");
             }
-            //se crean las nuevas listas de vehiculos y vehiculos pagos ya que hay que hay que mandarlas al controllerViewPayment
+            //se crean las nuevas listas de vehiculos y vehiculos pagos ya que hay que hay que mandarlas al controllerViewParking
             Map<String, Vehicle> payVehicleslistTemp = controllerParking.getControllerVehicle().addVehiclePaid(vehicle);
             Map<String, Vehicle> vehicleslistTemp = controllerParking.getControllerVehicle().eliminateVehicle(vehicle.getLicensePlate());
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ParkedScene.fxml"));
