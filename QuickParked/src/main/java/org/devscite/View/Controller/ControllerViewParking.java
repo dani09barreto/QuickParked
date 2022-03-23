@@ -82,19 +82,12 @@ public class ControllerViewParking {
 
     @FXML
     void generatePayment(ActionEvent event) {
-        ControllerParking controllerParking = new ControllerParking();
-        Vehicle car = null;
-        try {
-            car = new Car("GBM677", Calendar.getInstance(), CarModel.Automovil);
-        } catch (InvalidLicensePlate e) {
-            AlertUtils.alertError("Placa inválida", "La placa " + textLicensePlate.getText() + " no es válida", "Por favor revisa que esté bien digitada");
-        }
-        controllerParking.getControllerVehicle().getVehiclelist().put(car.getLicensePlate(), car);
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(MAIN_FXML_NAME));
             Parent root = (Parent) loader.load();
             ControllerViewPayment controllerPayment = loader.getController();
             controllerPayment.getControllerParking().getControllerVehicle().setVehiclelist(controllerParking.getControllerVehicle().getVehiclelist());
+            System.out.println(controllerPayment.getControllerParking().getControllerVehicle().getVehiclelist());
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             scene.getStylesheets().add(getClass().getResource(STYLE_SHEET_NAME).toExternalForm());
