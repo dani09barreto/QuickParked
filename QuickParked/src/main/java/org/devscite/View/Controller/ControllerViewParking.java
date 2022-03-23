@@ -18,10 +18,11 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.Objects;
 
-public class ControllerViewParking{
+public class ControllerViewParking {
 
     private final static String ICON_NAME = "../img/Logo3.png";
     private final static String MAIN_FXML_NAME = "../Aditionalsfmxl/PaymentScene.fxml";
+    private final static String MODIFY_FXML_NAME = "../Aditionalsfmxl/ModifyScene.fxml";
     private final static String STYLE_SHEET_NAME = "../styles.css";
     private final static String WINDOW_NAME = "Generar Pago";
     private ControllerParking controllerParking = new ControllerParking();
@@ -50,6 +51,9 @@ public class ControllerViewParking{
     private Button btnGeneratePayment;
 
     @FXML
+    private Button btnModify;
+
+    @FXML
     private MenuButton carModel;
 
     @FXML
@@ -61,13 +65,37 @@ public class ControllerViewParking{
     @FXML
     void generatePayment(ActionEvent event) {
         ControllerParking controllerParking = new ControllerParking();
-        Vehicle car = new Car("GBM677", Calendar.getInstance(), CarModel.Automovil);
+        Vehicle car = new Car("GZT687", Calendar.getInstance(), CarModel.Camioneta);
         controllerParking.getControllerVehicle().getVehiclelist().put(car.getLicensePlate(), car);
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(MAIN_FXML_NAME));
             Parent root = (Parent) loader.load();
             ControllerViewPayment controllerPayment = loader.getController();
             controllerPayment.getControllerParking().getControllerVehicle().setVehiclelist(controllerParking.getControllerVehicle().getVehiclelist());
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            scene.getStylesheets().add(getClass().getResource(STYLE_SHEET_NAME).toExternalForm());
+            stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream(ICON_NAME))));
+            stage.setTitle(WINDOW_NAME);
+            stage.setScene(scene);
+            stage.setMaximized(false);
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void modifyVehicle(ActionEvent event) {
+        ControllerParking controllerParking = new ControllerParking();
+        Vehicle car = new Car("GZT546", Calendar.getInstance(), CarModel.Camioneta);
+        controllerParking.getControllerVehicle().getVehiclelist().put(car.getLicensePlate(), car);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(MODIFY_FXML_NAME));
+            Parent root = (Parent) loader.load();
+            ControllerModifyVehicle controllerModify = loader.getController();
+            controllerModify.getControllerParking().getControllerVehicle().setVehiclelist(controllerParking.getControllerVehicle().getVehiclelist());
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             scene.getStylesheets().add(getClass().getResource(STYLE_SHEET_NAME).toExternalForm());

@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="609.0" prefWidth="1147.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devscite.View.Controller.ControllerViewParking">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="609.0" prefWidth="1147.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devscite.View.Controller.ControllerViewParking">
    <top>
       <AnchorPane prefHeight="46.0" prefWidth="1009.0" style="-fx-background-color: #1190CB;" styleClass="top-bar" BorderPane.alignment="CENTER">
          <children>
@@ -131,7 +131,7 @@
                               <Font size="25.0" />
                            </font>
                         </Label>
-                        <Button fx:id="btnGeneratePayment" layoutX="637.0" layoutY="511.0" mnemonicParsing="false" onAction="#generatePayment" style="-fx-background-color: #1190CB; -fx-background-radius: 100;" styleClass="botton" text="Generar Pago" textFill="WHITE">
+                        <Button fx:id="btnGeneratePayment" layoutX="689.0" layoutY="519.0" mnemonicParsing="false" onAction="#generatePayment" style="-fx-background-color: #1190CB; -fx-background-radius: 100;" styleClass="botton" text="Generar Pago" textFill="WHITE">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -141,6 +141,11 @@
                               <Image url="@img/car-park.png" />
                            </image>
                         </ImageView>
+                        <Button fx:id="btnModify" layoutX="45.0" layoutY="519.0" mnemonicParsing="false" onAction="#modifyVehicle" style="-fx-background-color: #1190CB; -fx-background-radius: 100;" styleClass="botton" text="Modificar " textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
                      </children>
                   </AnchorPane>
                </children>
