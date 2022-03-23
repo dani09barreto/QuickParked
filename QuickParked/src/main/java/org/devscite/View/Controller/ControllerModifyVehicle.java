@@ -3,13 +3,15 @@ package org.devscite.View.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import org.devscite.Controller.ControllerParking;
+import org.devscite.Model.CarModel;
 
-public class ControllerModifyVehicle {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class ControllerModifyVehicle implements Initializable {
     private ControllerParking controllerParking = new ControllerParking();
 
     public ControllerParking getControllerParking() {
@@ -29,14 +31,20 @@ public class ControllerModifyVehicle {
     private Button btnModify;
 
     @FXML
-    private ChoiceBox<?> VehicleTypes;
+    private ComboBox<CarModel> VehicleType;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        VehicleType.getItems().setAll(CarModel.values());
+    }
 
     @FXML
     void MakeModify(ActionEvent event) {
-        try{
 
-        }catch (){
-            
+        try {
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

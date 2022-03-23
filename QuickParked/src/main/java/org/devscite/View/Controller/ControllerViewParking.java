@@ -15,8 +15,10 @@ import org.devscite.Model.CarModel;
 import org.devscite.Model.Vehicle;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Calendar;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
 public class ControllerViewParking {
 
@@ -61,6 +63,11 @@ public class ControllerViewParking {
 
     @FXML
     private ToggleGroup type_vehicle;
+
+
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
 
     @FXML
     void generatePayment(ActionEvent event) {

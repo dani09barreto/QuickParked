@@ -1,11 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devscite.View.Controller.ControllerModifyVehicle">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="394.0" styleClass="rigth-bar" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devscite.View.Controller.ControllerModifyVehicle">
    <children>
-      <Label layoutX="213.0" layoutY="60.0" text="Modificar" />
+      <AnchorPane prefHeight="50.0" prefWidth="394.0" style="-fx-background-color: #1190CB #1190CB #1190CB;" styleClass="top-bar">
+         <children>
+            <Button fx:id="btnBack" layoutX="15.0" layoutY="11.0" mnemonicParsing="false" onAction="#back" prefHeight="16.0" prefWidth="32.0" style="-fx-background-color: #FFFFFFFF; -fx-background-radius: 100;" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="28.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/back-button.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
+      <TextArea fx:id="Platelist" layoutX="35.0" layoutY="160.0" prefHeight="134.0" prefWidth="200.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="71.0" prefHeight="37.0" prefWidth="221.0" style="-fx-background-color: #1190CB; -fx-background-radius: 5;" text="Modificar" textAlignment="JUSTIFY" textFill="WHITE">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Label layoutX="31.0" layoutY="115.0" text="Selecione una placa">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="plateIn" layoutX="30.0" layoutY="349.0" promptText="Ingrese placa" styleClass="search-bar" />
+      <Label layoutX="30.0" layoutY="314.0" text="Placa">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="30.0" layoutY="391.0" text="Tipo de vehiculo">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnModify" layoutX="283.0" layoutY="460.0" mnemonicParsing="false" onAction="#MakeModify" prefHeight="31.0" prefWidth="87.0" style="-fx-background-color: #1190CB; -fx-background-radius: 100;" text="Modificar" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <ComboBox fx:id="VehicleType" layoutX="30.0" layoutY="435.0" prefWidth="150.0" promptText="Categoria" styleClass="search-bar" />
+      <ImageView fitHeight="65.0" fitWidth="53.0" layoutX="314.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Logo3.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
