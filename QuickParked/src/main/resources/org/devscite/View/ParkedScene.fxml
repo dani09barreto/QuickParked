@@ -68,7 +68,7 @@
                               <Font size="25.0" />
                            </font>
                         </Label>
-                        <RadioButton fx:id="selectedCar" layoutX="67.0" layoutY="156.0" mnemonicParsing="false" text="Carro">
+                        <RadioButton fx:id="selectedCar" layoutX="67.0" layoutY="156.0" mnemonicParsing="false" onAction="#carSelectActivate" text="Carro">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -76,7 +76,7 @@
                               <ToggleGroup fx:id="type_vehicle" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton fx:id="selectedMotorcycle" layoutX="201.0" layoutY="156.0" mnemonicParsing="false" text="Moto" toggleGroup="$type_vehicle">
+                        <RadioButton fx:id="selectedMotorcycle" layoutX="201.0" layoutY="156.0" mnemonicParsing="false" onAction="#motorcycleSelectActivate" text="Moto" toggleGroup="$type_vehicle">
                            <font>
                               <Font size="15.0" />
                            </font>
