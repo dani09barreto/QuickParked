@@ -145,9 +145,6 @@ public class ControllerViewParking {
      */
     @FXML
     void modifyVehicle(ActionEvent event) throws InvalidLicensePlate {
-        ControllerParking controllerParking = new ControllerParking();
-        Vehicle car = new MotorCycle("GBM34F",Calendar.getInstance());
-        controllerParking.getControllerVehicle().getVehiclelist().put(car.getLicensePlate(), car);
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(MODIFY_FXML_NAME));
             Parent root = (Parent) loader.load();
@@ -157,7 +154,7 @@ public class ControllerViewParking {
             Stage stage = new Stage();
             scene.getStylesheets().add(getClass().getResource(STYLE_SHEET_NAME).toExternalForm());
             stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream(ICON_NAME))));
-            stage.setTitle(WINDOW_NAME);
+            stage.setTitle("Realizar Modificacion");
             stage.setScene(scene);
             stage.setMaximized(false);
             stage.setResizable(false);
