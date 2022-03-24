@@ -29,7 +29,7 @@ public abstract class Vehicle {
      * @param licensePlate LicensePlate to check
      * @return True if valid
      */
-    protected abstract boolean checkPlate(String licensePlate);
+    public abstract boolean checkPlate(String licensePlate);
 
     public UUID getIdVehicle() {
         return idVehicle;

@@ -16,7 +16,7 @@ public class MotorCycle extends Vehicle {
     }
 
     @Override
-    protected boolean checkPlate(String licensePlate) {
+    public boolean checkPlate(String licensePlate) {
         return licensePlate.matches(plateFormat);
     }
 

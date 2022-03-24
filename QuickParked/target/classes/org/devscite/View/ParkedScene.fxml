@@ -129,6 +129,11 @@
                               <Image url="@img/car-park.png" />
                            </image>
                         </ImageView>
+                        <Button fx:id="btnModify" layoutX="45.0" layoutY="519.0" mnemonicParsing="false" onAction="#modifyVehicle" style="-fx-background-color: #1190CB; -fx-background-radius: 100;" styleClass="botton" text="Modificar " textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
                      </children>
                   </AnchorPane>
                </children>
