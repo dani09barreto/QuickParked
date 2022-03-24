@@ -3,7 +3,6 @@ package org.devscite.Model;
 import org.devscite.Utils.Exeptions.InvalidLicensePlate;
 
 import java.util.Calendar;
-import java.util.Locale;
 import java.util.UUID;
 
 public abstract class Vehicle {
@@ -25,9 +24,10 @@ public abstract class Vehicle {
     }
 
     /**
+     * Checks if a plate is valid, should be overriden by Vehicles types
+     *
      * @param licensePlate LicensePlate to check
      * @return True if valid
-     * @brief Checks if a plate is valid, should be overriden by Vehicles types
      */
     protected abstract boolean checkPlate(String licensePlate);
 
