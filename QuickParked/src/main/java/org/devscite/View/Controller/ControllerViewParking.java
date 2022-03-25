@@ -122,6 +122,7 @@ public class ControllerViewParking {
     /**
      * Function to call when Car is selected
      */
+
     @FXML
     void carSelectActivate(ActionEvent event) {
         carModel.setDisable(false);
