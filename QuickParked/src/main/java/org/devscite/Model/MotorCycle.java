@@ -6,20 +6,13 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class MotorCycle extends Vehicle {
-    private Integer fare;
-
     private final static String plateFormat = "[a-zA-Z]{3}[0-9]{2}[a-zA-Z]";
 
     public MotorCycle(String licensePlate, Calendar checkin) throws InvalidLicensePlate {
         super(licensePlate, checkin);
         this.fare = 30;
+        this.typeVehicle = "Moto";
     }
-
-    @Override
-    public boolean checkPlate(String licensePlate) {
-        return licensePlate.matches(plateFormat);
-    }
-
     public Integer getFare() {
         return fare;
     }
@@ -36,6 +29,10 @@ public class MotorCycle extends Vehicle {
         Integer minuts = (int) (Math.abs(dateOutMils - dateinMils) / (1000 * 60));
         Integer prace = this.fare * minuts;
         this.price = prace;
+    }
+    @Override
+    public boolean checkPlate(String licensePlate) {
+        return licensePlate.matches(plateFormat);
     }
 
     @Override

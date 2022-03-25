@@ -8,13 +8,7 @@ import java.util.Calendar;
 public class Car extends Vehicle {
 
     private static final String plateFormat = "[a-zA-Z]{3}[0-9]{3}";
-
-    private Integer fare;
     private CarModel carModel;
-
-    public Car(String licensePlate, Calendar checkin) throws InvalidLicensePlate {
-        this(licensePlate, checkin, CarModel.Automovil);
-    }
 
     public Car(String licensePlate, Calendar checkin, CarModel carModel) throws InvalidLicensePlate {
         super(licensePlate, checkin);
@@ -31,6 +25,7 @@ public class Car extends Vehicle {
         if (this.carModel == CarModel.Electrico) {
             this.fare = 80;
         }
+        this.typeVehicle = "Carro";
     }
 
     @Override
@@ -44,14 +39,6 @@ public class Car extends Vehicle {
 
     public void setFare(Integer fare) {
         this.fare = fare;
-    }
-
-    public CarModel getTipoCarro() {
-        return carModel;
-    }
-
-    public void setTipoCarro(CarModel carModel) {
-        this.carModel = carModel;
     }
 
     public CarModel getCarModel() {

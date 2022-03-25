@@ -57,7 +57,7 @@ public class ControllerModifyVehicle implements Initializable {
     void MakeModify(ActionEvent event) throws IOException {
         try {
             String placaModificar = PlateList.getSelectionModel().getSelectedItem();
-            Vehicle v = controllerParking.getControllerVehicle().vehicleExist(placaModificar);
+            Vehicle v = controllerParking.getControllerVehicle().vehicleExist(placaModificar.toUpperCase());
             if (v instanceof Car || v instanceof MotorCycle) {
                 if (v.checkPlate(plateIn.getText())) {
                     if (v instanceof Car && VehicleType.getValue() != null) {
@@ -84,7 +84,6 @@ public class ControllerModifyVehicle implements Initializable {
                 } else {
                     AlertUtils.alertError("ERROR", "PLACA INVALIDA", "Digita una placa valida");
                 }
-
             }
         } catch (Exception e) {
             e.printStackTrace();
