@@ -36,22 +36,22 @@ public class ControllerViewParking {
     private final ControllerParking controllerParking = new ControllerParking();
 
     @FXML
-    private TableColumn<?, ?> columCarModel;
+    private TableColumn<Car, CarModel> columCarModel;
 
     @FXML
-    private TableColumn<?, ?> columCheckin;
+    private TableColumn<Vehicle, Calendar> columCheckin;
 
     @FXML
-    private TableColumn<?, ?> columFare;
+    private TableColumn<Vehicle, Integer> columFare;
 
     @FXML
-    private TableColumn<?, ?> columLicensePlate;
+    private TableColumn<Vehicle, String> columLicensePlate;
 
     @FXML
-    private TableColumn<?, ?> columPlace;
+    private TableColumn<Vehicle, Integer> columPlace;
 
     @FXML
-    private TableView<?> tableVehicle;
+    private TableView<Vehicle> tableVehicle;
 
     @FXML
     private Button btnAdd;
@@ -71,11 +71,6 @@ public class ControllerViewParking {
     @FXML
     private ToggleGroup type_vehicle;
 
-
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
-
     @FXML
     private RadioButton selectedCar;
 
@@ -85,6 +80,7 @@ public class ControllerViewParking {
     @FXML
     public void initialize() {
         initCarTypes();
+        renderWindow();
     }
 
     public void initCarTypes() {
@@ -167,7 +163,6 @@ public class ControllerViewParking {
     void insertCar(ActionEvent event) {
         // Obtener el tipo de vehículo
         Vehicle new_vehicle;
-
         // Crear el vehículo
         // NOTA: Los vehículos siempre se guardan con placas en MAYÚSCULAS
         try {
@@ -205,6 +200,22 @@ public class ControllerViewParking {
 
         // Borrar el campo de datos
         textLicensePlate.clear();
+        renderWindow();
+    }
+    @FXML
+    void reload(ActionEvent event) {
+        renderWindow();
+    }
+    public void renderWindow (){
+        clearWindow();
+        tableVehicle.getItems().addAll(controllerParking.getControllerVehicle().getVehiclelist().values());
+        if (controllerParking.getControllerVehicle().getVehiclelist().size() > 0){
+            btnGeneratePayment.setDisable(false);
+            btnModify.setDisable(false);
+        }
+    }
+    public void clearWindow (){
+        tableVehicle.getItems().clear();
     }
     public ControllerParking getControllerParking() {
         return controllerParking;
