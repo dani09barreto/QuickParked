@@ -15,12 +15,14 @@ import org.devscite.Model.MotorCycle;
 import org.devscite.Model.Vehicle;
 import org.devscite.Utils.AlertUtils;
 import org.devscite.Utils.Exeptions.InvalidLicensePlate;
+import org.devscite.Utils.Exeptions.ParkingFull;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Calendar;
-import java.util.Locale;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.util.ResourceBundle;
 import static java.awt.SystemColor.control;
 
@@ -31,25 +33,25 @@ public class ControllerViewParking {
     private final static String MODIFY_FXML_NAME = "../Aditionalsfmxl/ModifyScene.fxml";
     private final static String STYLE_SHEET_NAME = "../styles.css";
     private final static String WINDOW_NAME = "Generar Pago";
-    private ControllerParking controllerParking = new ControllerParking();
+    private final ControllerParking controllerParking = new ControllerParking();
 
     @FXML
-    private TableColumn<?, ?> columCarModel;
+    private TableColumn<Car, CarModel> columCarModel;
 
     @FXML
-    private TableColumn<?, ?> columCheckin;
+    private TableColumn<Vehicle, Calendar> columCheckin;
 
     @FXML
-    private TableColumn<?, ?> columFare;
+    private TableColumn<Vehicle, Integer> columFare;
 
     @FXML
-    private TableColumn<?, ?> columLicensePlate;
+    private TableColumn<Vehicle, String> columLicensePlate;
 
     @FXML
-    private TableColumn<?, ?> columPlace;
+    private TableColumn<Vehicle, Integer> columPlace;
 
     @FXML
-    private TableView<?> tableVehicle;
+    private TableView<Vehicle> tableVehicle;
 
     @FXML
     private Button btnAdd;
@@ -69,16 +71,31 @@ public class ControllerViewParking {
     @FXML
     private ToggleGroup type_vehicle;
 
-
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
-
     @FXML
     private RadioButton selectedCar;
 
     @FXML
     private RadioButton selectedMotorcycle;
+
+    @FXML
+    public void initialize() {
+        initCarTypes();
+        renderWindow();
+    }
+
+    public void initCarTypes() {
+        // carModel fill
+        carModel.getItems().clear();
+        // add every CarModel to carModel MenuButton
+        carModel.getItems().addAll(
+                Stream.of(CarModel.values())
+                        .map((e) -> {
+                            MenuItem item = new MenuItem(e.name());
+                            item.setOnAction((action) -> carModel.setText(item.getText()));
+                            return item;
+                        })
+                        .collect(Collectors.toList()));
+    }
 
     @FXML
     void generatePayment(ActionEvent event) {
@@ -102,11 +119,28 @@ public class ControllerViewParking {
         }
     }
 
+    /**
+     * Function to call when Car is selected
+     */
+    @FXML
+    void carSelectActivate(ActionEvent event) {
+        carModel.setDisable(false);
+    }
+
+    /**
+     * Function to call when Motorcycle is selected
+     */
+    @FXML
+    void motorcycleSelectActivate(ActionEvent event) {
+        carModel.setDisable(true);
+        carModel.setText("Tipo de Vehículo");
+    }
+
+    /**
+     * Function to call when 'insertCar' button is pressed
+     */
     @FXML
     void modifyVehicle(ActionEvent event) throws InvalidLicensePlate {
-        ControllerParking controllerParking = new ControllerParking();
-        Vehicle car = new Car("GZT546", Calendar.getInstance(), CarModel.Camioneta);
-        controllerParking.getControllerVehicle().getVehiclelist().put(car.getLicensePlate(), car);
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(MODIFY_FXML_NAME));
             Parent root = (Parent) loader.load();
@@ -116,7 +150,7 @@ public class ControllerViewParking {
             Stage stage = new Stage();
             scene.getStylesheets().add(getClass().getResource(STYLE_SHEET_NAME).toExternalForm());
             stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream(ICON_NAME))));
-            stage.setTitle(WINDOW_NAME);
+            stage.setTitle("Realizar Modificacion");
             stage.setScene(scene);
             stage.setMaximized(false);
             stage.setResizable(false);
@@ -129,12 +163,11 @@ public class ControllerViewParking {
     void insertCar(ActionEvent event) {
         // Obtener el tipo de vehículo
         Vehicle new_vehicle;
-
         // Crear el vehículo
         // NOTA: Los vehículos siempre se guardan con placas en MAYÚSCULAS
         try {
             if (selectedCar.isSelected()) {
-                new_vehicle = new Car(textLicensePlate.getText(), Calendar.getInstance());
+                new_vehicle = new Car(textLicensePlate.getText(), Calendar.getInstance(), CarModel.valueOf(carModel.getText()));
             } else if (selectedMotorcycle.isSelected()) {
                 new_vehicle = new MotorCycle(textLicensePlate.getText(), Calendar.getInstance());
             } else {
@@ -144,21 +177,45 @@ public class ControllerViewParking {
             }
 
         } catch (InvalidLicensePlate invalidPlate) {
-            AlertUtils.alertError("Placa inválida", "La placa " + invalidPlate.getMessage() + " no es válida", "Por favor revisa que esté bien escrita");
+            AlertUtils.alertError("Error vehículo", "La placa " + invalidPlate.getMessage() + " no es válida", "Por favor revisa que esté bien escrita");
+            return;
+        } catch (IllegalArgumentException invalidVehicleType) {
+            AlertUtils.alertError("Error vehículo", "No ha seleccionado ningún tipo de vehículo", "Por favor seleccione un tipo de vehículo");
             return;
         }
 
         // Añadir el vehículo
-        if (!controllerParking.getControllerVehicle().addVehicle(new_vehicle)) {
-            AlertUtils.alertError("Error de inserción", "El vehículo ya está registrado", "Por favor revisa la placa");
+        try {
+            if (!controllerParking.getControllerVehicle().addVehicle(new_vehicle)) {
+                AlertUtils.alertError("Error de inserción", "El vehículo ya está registrado", "Por favor revisa la placa");
+                return;
+            }
+        } catch (ParkingFull e) {
+            AlertUtils.alertError("Error al insertar vehículo", "El parqueadero se encuentra lleno", "No se insertó el vehículo");
             return;
         }
 
         // Mostrar una confirmación
-        AlertUtils.alertInformation("Inserción exitosa", "Vehículo insertado", "El vehículo de placa: " + new_vehicle.getLicensePlate() + " ha sido registrado con éxito");
+        AlertUtils.alertInformation("Puesto de parqueo", "El vehículo de placas: " + new_vehicle.getLicensePlate() + " debe parquearse en el espacio: " + new_vehicle.getParkingPlace().toString(), "Vehículo registrado en el sistema con éxito");
 
         // Borrar el campo de datos
         textLicensePlate.clear();
+        renderWindow();
+    }
+    @FXML
+    void reload(ActionEvent event) {
+        renderWindow();
+    }
+    public void renderWindow (){
+        clearWindow();
+        tableVehicle.getItems().addAll(controllerParking.getControllerVehicle().getVehiclelist().values());
+        if (controllerParking.getControllerVehicle().getVehiclelist().size() > 0){
+            btnGeneratePayment.setDisable(false);
+            btnModify.setDisable(false);
+        }
+    }
+    public void clearWindow (){
+        tableVehicle.getItems().clear();
     }
     public ControllerParking getControllerParking() {
         return controllerParking;

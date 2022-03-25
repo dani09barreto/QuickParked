@@ -11,6 +11,7 @@ import org.devscite.Controller.ControllerParking;
 import org.devscite.Model.Car;
 import org.devscite.Model.Vehicle;
 import org.devscite.Utils.AlertUtils;
+import org.devscite.Utils.Exeptions.ValueNotValid;
 import org.devscite.Utils.Exeptions.VehicleNotExist;
 
 import java.text.SimpleDateFormat;
@@ -64,7 +65,7 @@ public class ControllerViewPayment {
             Vehicle vehicle = controllerParking.generatePayment(licensePlate);
             labelLicensePlate.setText(vehicle.getLicensePlate());
             if (vehicle instanceof Car){
-                labelCarModel.setText(((Car) vehicle).getTipoCarro().name());
+                labelCarModel.setText(((Car) vehicle).getCarModel().name());
             }
             else
                 labelCarModel.setText("N.A");
@@ -81,63 +82,73 @@ public class ControllerViewPayment {
     }
     @FXML
     void payServiceText(ActionEvent event) {
-        //se recibe la placa
         String licensePlate = textLicensePlate.getText();
-        //se crea la instancia de la placa
-        Vehicle vehicle = controllerParking.getControllerVehicle().vehicleExist(licensePlate);
+        Integer value = Integer.valueOf(textValue.getText());
+        Vehicle vehicle = controllerParking.getControllerVehicle().vehicleExist(licensePlate.toUpperCase());
         try {
             if (vehicle == null){
                 throw new VehicleNotExist("el vehiculo no existe");
             }
-            //se crean las nuevas listas de vehiculos y vehiculos pagos ya que hay que hay que mandarlas al controllerViewParking
+            if (value < 0 || value < vehicle.getPrice()){
+                throw new ValueNotValid("Valor no es valido");
+            }
             Map<String, Vehicle> payVehicleslistTemp = controllerParking.getControllerVehicle().addVehiclePaid(vehicle);
             Map<String, Vehicle> vehicleslistTemp = controllerParking.getControllerVehicle().eliminateVehicle(vehicle.getLicensePlate());
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ParkedScene.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../ParkedScene.fxml"));
             Parent root = (Parent) loader.load();
-            ControllerViewParking controllerPayment = loader.getController();
-            controllerPayment.getControllerParking().getControllerVehicle().setPaidVehiclelist(payVehicleslistTemp);
-            controllerPayment.getControllerParking().getControllerVehicle().setVehiclelist(vehicleslistTemp);
+            ControllerViewParking controllerViewParking = loader.getController();
+            controllerViewParking.getControllerParking().getControllerVehicle().setPaidVehiclelist(payVehicleslistTemp);
+            controllerViewParking.getControllerParking().getControllerVehicle().setVehiclelist(vehicleslistTemp);
+            AlertUtils.alertConfirmation("Pago realizado", "El pago del Vehiculo con placas: "+ vehicle.getLicensePlate()+ " fue exitoso\n"+ "Cambio: "+ (value - vehicle.getPrice()),"");
+            ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
 
         }catch (VehicleNotExist e){
-            e.getMessage();
-            AlertUtils.alertError("Error", "Error el vehiculos solicitado no existe", "Pruebe con otra Placa");
+            e.printStackTrace();
+            AlertUtils.alertError("Error", "Error el vehiculo solicitado no existe", "Pruebe con otra Placa");
+        }catch (ValueNotValid e){
+            e.printStackTrace();
+            AlertUtils.alertError("Error", "Error el valor ingresado no es valido", "El Pago no es valido revise el monto");
         }
         catch (Exception e){
-            e.getMessage();
+            e.printStackTrace();
+            AlertUtils.alertError("Error", "Error el Pago no pudo ser realizado", "Intentalo de nuevo");
         }
-        Integer value = Integer.valueOf(textValue.getText());
-        AlertUtils.alertConfirmation("Pago realizado", "El pago del Vehiculo con placas: "+ vehicle.getLicensePlate()+ "fue exitoso\n"+ "Cambio: "+ (value - vehicle.getPrice()),"");
-        ((Stage) (((TextField) event.getSource()).getScene().getWindow())).close();
     }
 
     @FXML
     void payService(ActionEvent event) {
         String licensePlate = textLicensePlate.getText();
-        Vehicle vehicle = controllerParking.getControllerVehicle().vehicleExist(licensePlate);
+        Integer value = Integer.valueOf(textValue.getText());
+        Vehicle vehicle = controllerParking.getControllerVehicle().vehicleExist(licensePlate.toUpperCase());
         try {
             if (vehicle == null){
                 throw new VehicleNotExist("el vehiculo no existe");
             }
+            if (value < 0 || value < vehicle.getPrice()){
+                throw new ValueNotValid("Valor no es valido");
+            }
             Map<String, Vehicle> payVehicleslistTemp = controllerParking.getControllerVehicle().addVehiclePaid(vehicle);
             Map<String, Vehicle> vehicleslistTemp = controllerParking.getControllerVehicle().eliminateVehicle(vehicle.getLicensePlate());
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ParkedScene.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../ParkedScene.fxml"));
             Parent root = (Parent) loader.load();
-            ControllerViewParking controllerPayment = loader.getController();
-            controllerPayment.getControllerParking().getControllerVehicle().setPaidVehiclelist(payVehicleslistTemp);
-            controllerPayment.getControllerParking().getControllerVehicle().setVehiclelist(vehicleslistTemp);
+            ControllerViewParking controllerViewParking = loader.getController();
+            controllerViewParking.getControllerParking().getControllerVehicle().setPaidVehiclelist(payVehicleslistTemp);
+            controllerViewParking.getControllerParking().getControllerVehicle().setVehiclelist(vehicleslistTemp);
+            AlertUtils.alertConfirmation("Pago realizado", "El pago del Vehiculo con placas: "+ vehicle.getLicensePlate()+ " fue exitoso\n"+ "Cambio: "+ (value - vehicle.getPrice()),"");
+            ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
 
         }catch (VehicleNotExist e){
-            e.getMessage();
-            AlertUtils.alertError("Error", "Error el vehiculos solicitado no existe", "Pruebe con otra Placa");
+            e.printStackTrace();
+            AlertUtils.alertError("Error", "Error el vehiculo solicitado no existe", "Pruebe con otra Placa");
+        }catch (ValueNotValid e){
+            e.printStackTrace();
+            AlertUtils.alertError("Error", "Error el valor ingresado no es valido", "El Pago no es valido revise el monto");
         }
         catch (Exception e){
-            e.getMessage();
+            e.printStackTrace();
+            AlertUtils.alertError("Error", "Error el Pago no pudo ser realizado", "Intentalo de nuevo");
         }
-        Integer value = Integer.valueOf(textValue.getText());
-        AlertUtils.alertConfirmation("Pago realizado", "El pago del Vehiculo con placas: "+ vehicle.getLicensePlate()+ "fue exitoso\n"+ "Cambio: "+ (value - vehicle.getPrice()),"");
-        ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
     }
-
     @FXML
     void back(ActionEvent event) {
         ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();

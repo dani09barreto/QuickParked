@@ -1,10 +1,11 @@
 package org.devscite.Controller;
 
 import org.devscite.Model.Vehicle;
+import org.devscite.Utils.Exeptions.ParkingFull;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ControllerVehicle {
     private Map<String, Vehicle> vehiclelist = new HashMap<>();
@@ -41,9 +42,43 @@ public class ControllerVehicle {
         return this.paidVehiclelist;
     }
 
-    public boolean addVehicle(Vehicle vehicle) {
+    /**
+     * Assign a random parkingSlot
+     *
+     * @return Integer representing parkingSlot
+     * <p>
+     * TODO: Maybe create a parkingSlot controller and a parkingSlot class to represent different types of parking slots
+     */
+    public Integer parkingSlotAssignment() throws ParkingFull {
+        Random randomizer = new Random(System.currentTimeMillis());
+        Integer slot = randomizer.nextInt(ControllerParking.max_parking_slots + 1);
+
+        // Array with assigned slots
+        Set<Integer> assignedSlots = this.vehiclelist.values().stream()
+                .map(Vehicle::getParkingPlace)
+                .collect(Collectors.toSet());
+
+        // Si los slots contienen todos los valores posibles del 0 al max, Entonces el parqueadero está lleno
+        if (assignedSlots.containsAll(
+                IntStream.rangeClosed(0, ControllerParking.max_parking_slots).boxed().collect(Collectors.toSet()))) {
+            throw new ParkingFull();
+        }
+
+        // If slot is contained within assignedSlots
+        while (assignedSlots.contains(slot)) {
+            slot = randomizer.nextInt(ControllerParking.max_parking_slots + 1);
+            System.out.println("Looking for a parking slot");
+        }
+
+        return slot;
+    }
+
+    public boolean addVehicle(Vehicle vehicle) throws ParkingFull {
         if (vehiclelist.containsKey(vehicle.getLicensePlate().toUpperCase()))
             return false;
+
+        // Assign a parking slot
+        vehicle.setParkingPlace(this.parkingSlotAssignment());
         this.vehiclelist.put(vehicle.getLicensePlate().toUpperCase(), vehicle);
         return true;
     }

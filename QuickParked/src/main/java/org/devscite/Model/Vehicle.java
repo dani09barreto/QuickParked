@@ -2,8 +2,8 @@ package org.devscite.Model;
 
 import org.devscite.Utils.Exeptions.InvalidLicensePlate;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
 import java.util.UUID;
 
 public abstract class Vehicle {
@@ -13,6 +13,8 @@ public abstract class Vehicle {
     protected Calendar checkout;
     protected long price;
     protected Integer parkingPlace;
+    protected Integer fare = 0;
+    protected String typeVehicle;
 
     public Vehicle(String licensePlate, Calendar checkin) throws InvalidLicensePlate {
         // Check if plate is correct
@@ -23,13 +25,6 @@ public abstract class Vehicle {
         this.licensePlate = licensePlate.toUpperCase();
         this.checkin = checkin;
     }
-
-    /**
-     * @param licensePlate LicensePlate to check
-     * @return True if valid
-     * @brief Checks if a plate is valid, should be overriden by Vehicles types
-     */
-    protected abstract boolean checkPlate(String licensePlate);
 
     public UUID getIdVehicle() {
         return idVehicle;
@@ -45,6 +40,11 @@ public abstract class Vehicle {
 
     public Calendar getCheckin() {
         return checkin;
+    }
+
+    public String getCheckinString() {
+        SimpleDateFormat Fecha = new SimpleDateFormat("hh:mm:ss aa");
+        return Fecha.format(checkin.getTime());
     }
 
     public Calendar getCheckout() {
@@ -71,6 +71,10 @@ public abstract class Vehicle {
         this.price = price;
     }
 
+    public String getTypeVehicle() {
+        return typeVehicle;
+    }
+
     public Integer getParkingPlace() {
         return parkingPlace;
     }
@@ -79,5 +83,21 @@ public abstract class Vehicle {
         this.parkingPlace = parkingPlace;
     }
 
+    public Integer getFare() {
+        return fare;
+    }
+
+    public void setFare(Integer fare) {
+        this.fare = fare;
+    }
+
     public abstract void calculatePrace();
+
+    /**
+     * Checks if a plate is valid, should be overriden by Vehicles types
+     *
+     * @param licensePlate LicensePlate to check
+     * @return True if valid
+     */
+    public abstract boolean checkPlate(String licensePlate);
 }
