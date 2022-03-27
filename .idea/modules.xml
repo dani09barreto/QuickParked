@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/QuickParked.iml" filepath="$PROJECT_DIR$/.idea/QuickParked.iml" />
-      <module fileurl="file://$PROJECT_DIR$/QuickParked/untitled.iml" filepath="$PROJECT_DIR$/QuickParked/untitled.iml" />
-    </modules>
-  </component>
-</project>
