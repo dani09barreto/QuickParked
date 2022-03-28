@@ -34,7 +34,9 @@ public abstract class Vehicle {
         return licensePlate;
     }
 
-    public void setLicensePlate(String licensePlate) {
+    public void setLicensePlate(String licensePlate) throws InvalidLicensePlate {
+        if (!this.checkPlate(licensePlate.toUpperCase()))
+            throw new InvalidLicensePlate(licensePlate);
         this.licensePlate = licensePlate;
     }
 

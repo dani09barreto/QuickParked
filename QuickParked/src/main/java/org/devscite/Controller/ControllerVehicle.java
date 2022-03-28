@@ -51,7 +51,7 @@ public class ControllerVehicle {
      */
     public Integer parkingSlotAssignment() throws ParkingFull {
         Random randomizer = new Random(System.currentTimeMillis());
-        Integer slot = randomizer.nextInt(ControllerParking.max_parking_slots + 1);
+        int slot = randomizer.nextInt(ControllerParking.max_parking_slots + 1);
 
         // Array with assigned slots
         Set<Integer> assignedSlots = this.vehiclelist.values().stream()

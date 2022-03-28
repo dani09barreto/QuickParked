@@ -11,7 +11,7 @@ public class ControllerParking {
     // Slots de parqueadero TODO: Que el usuario pueda cambiarlo
     static final Integer max_parking_slots = 10;
 
-    private ControllerVehicle controllerVehicle = new ControllerVehicle();
+    private final ControllerVehicle controllerVehicle = new ControllerVehicle();
 
     public ControllerVehicle getControllerVehicle() {
         return controllerVehicle;
