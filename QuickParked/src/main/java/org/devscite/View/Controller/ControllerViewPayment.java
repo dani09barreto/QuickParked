@@ -52,6 +52,7 @@ public class ControllerViewPayment extends RealTimeUpdateView<ControllerParking>
 
     void resetLabels() {
         this.textValue.setText("");
+        this.textLicensePlate.setText("");
         this.labelCheckIn.setText("");
         this.labelFee.setText("");
         this.labelCarModel.setText("");
@@ -59,14 +60,36 @@ public class ControllerViewPayment extends RealTimeUpdateView<ControllerParking>
         this.labelLicensePlate.setText("");
     }
 
+    void fillFields(Vehicle vehicle) {
+        SimpleDateFormat time = new SimpleDateFormat("hh:mm:ss aa");
+
+        this.textLicensePlate.setText(vehicle.getLicensePlate());
+
+        labelCheckIn.setText(time.format(vehicle.getCheckin().getTime()));
+        labelFee.setText(vehicle.getRate().toString() + " $/min");
+
+        vehicle.calculatePrice();
+        labelPrice.setText(vehicle.getPrice() + " $");
+
+        labelLicensePlate.setText(vehicle.getLicensePlate());
+
+        if (vehicle instanceof Car) {
+            labelCarModel.setText(vehicle.getModel());
+        } else {
+            labelCarModel.setText("N.A");
+        }
+    }
+
     @FXML
     void payService(ActionEvent event) {
         // Get values from Screen
         String licensePlate = textLicensePlate.getText();
-        int value = Integer.parseInt(textValue.getText());
         Vehicle vehicle = manager.getController().getControllerVehicle().getVehicle(licensePlate.toUpperCase());
+        int value;
 
         try {
+            value = Integer.parseInt(textValue.getText());
+
             if (vehicle == null) {
                 throw new VehicleNotExist("el vehiculo no existe");
             }
@@ -79,11 +102,13 @@ public class ControllerViewPayment extends RealTimeUpdateView<ControllerParking>
                 throw new VehicleNotExist("Error intero, el vehículo no existe");
 
             notifyUpdate();
+            System.out.println("VAL: " + this.labelPrice.getText());
+            value -= vehicle.getPrice();
 
         } catch (VehicleNotExist e) {
             AlertUtils.alertError("Error", "Error: el vehiculo solicitado no existe", "Pruebe con otra Placa");
             return;
-        } catch (ValueNotValid e) {
+        } catch (ValueNotValid | NumberFormatException e) {
             AlertUtils.alertError("Error", "Error: el valor ingresado no es valido", "El pago no es valido, revise el monto");
             return;
         } catch (Exception e) {
@@ -92,32 +117,20 @@ public class ControllerViewPayment extends RealTimeUpdateView<ControllerParking>
             return;
         }
 
-        AlertUtils.alertMiniInformation("Pago exitoso", "El pago del vehículo fue exitoso");
+        AlertUtils.alertInformation("Información", "Pago exitoso", "El cambio es de: " + value);
         close(event);
     }
 
     @FXML
     void searchLicensePlate(ActionEvent event) {
-        SimpleDateFormat time = new SimpleDateFormat("hh:mm:ss aa");
+
         String licensePlate = textLicensePlate.getText().toUpperCase();
 
         try {
             Vehicle vehicle = manager.getController().getControllerVehicle().getVehicle(licensePlate);
             if (vehicle == null) throw new VehicleNotExist("No existe el vehículo");
-            labelLicensePlate.setText(vehicle.getLicensePlate());
 
-            if (vehicle instanceof Car) {
-                labelCarModel.setText(vehicle.getModel());
-            } else {
-                labelCarModel.setText("N.A");
-            }
-
-            labelCheckIn.setText(time.format(vehicle.getCheckin().getTime()));
-            labelFee.setText(vehicle.getRate().toString() + " $/min");
-
-            vehicle.calculatePrice();
-            labelPrice.setText(vehicle.getPrice() + " $");
-
+            fillFields(vehicle);
         } catch (VehicleNotExist e) {
             AlertUtils.alertError("Error", "Error el vehículo solicitado no existe", "Pruebe con otra Placa");
         } catch (Exception e) {

@@ -6,8 +6,6 @@ import org.devscite.Controller.ControllerParking;
 import org.devscite.Model.Car;
 import org.devscite.Model.CarModel;
 import org.devscite.Model.MotorCycle;
-import org.devscite.Utils.Exeptions.InvalidLicensePlate;
-import org.devscite.Utils.Exeptions.ParkingFull;
 import org.devscite.Utils.ViewType;
 import org.devscite.View.Controller.ControllerViewParking;
 import org.devscite.View.Controller.ViewManagementController;
@@ -17,7 +15,7 @@ import java.util.Random;
 
 public class App extends Application {
 
-    ViewManagementController<ControllerParking> viewManager = new ViewManagementController<>(new ControllerParking());
+    final ViewManagementController<ControllerParking> viewManager = new ViewManagementController<>(new ControllerParking());
 
     private void generateDebugData() {
         //TODO: DEBUG

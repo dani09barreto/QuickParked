@@ -95,8 +95,7 @@ public class AlertUtils {
         alert.setTitle(titulo);
         alert.setHeaderText(header);
         alert.setContentText(mensaje);
-        Optional<ButtonType> result = alert.showAndWait();
-        return result;
+        return alert.showAndWait();
     }
 
     public static File openFileChooserModeRead(FileChooser.ExtensionFilter filtro, Window window){

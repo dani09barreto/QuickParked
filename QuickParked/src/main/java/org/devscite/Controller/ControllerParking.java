@@ -1,10 +1,5 @@
 package org.devscite.Controller;
 
-import org.devscite.Model.Vehicle;
-import org.devscite.Utils.Exeptions.VehicleNotExist;
-
-import java.util.Calendar;
-
 public class ControllerParking {
 
     // Slots de parqueadero TODO: Que el usuario pueda cambiarlo
