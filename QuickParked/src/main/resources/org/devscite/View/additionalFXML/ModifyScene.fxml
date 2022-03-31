@@ -7,7 +7,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0"
             prefWidth="423.0" styleClass="rigth-bar" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/16"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devscite.View.Controller.ControllerModifyVehicle">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devscite.View.Controller.ControllerViewModifyVehicle">
     <AnchorPane prefHeight="50.0" prefWidth="423.0" style="-fx-background-color: #1190CB #1190CB #1190CB;"
                 styleClass="top-bar">
         <Button fx:id="backBtn" layoutX="11.0" layoutY="9.0" mnemonicParsing="false" onAction="#close" prefHeight="16.0"

@@ -108,9 +108,9 @@
                                 <javafx.scene.control.cell.PropertyValueFactory property="TypeVehicle"/>
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn prefWidth="75.0" text="Tipo Vehículo">
+                        <TableColumn prefWidth="75.0" text="Tipo Vehículo" fx:id="model">
                             <cellValueFactory>
-                                <javafx.scene.control.cell.PropertyValueFactory property="CarModel"/>
+                                <javafx.scene.control.cell.PropertyValueFactory property="Model"/>
                             </cellValueFactory>
                         </TableColumn>
                         <!--License plate-->
@@ -122,13 +122,13 @@
                         <!-- Checkin Hour -->
                         <TableColumn prefWidth="75.0" text="Ingreso" fx:id="inHour">
                             <cellValueFactory>
-                                <javafx.scene.control.cell.PropertyValueFactory property="CheckinString"/>
+                                <javafx.scene.control.cell.PropertyValueFactory property="CheckinFormatted"/>
                             </cellValueFactory>
                         </TableColumn>
                         <!-- Fare -->
                         <TableColumn prefWidth="75.0" text="Tarifa" fx:id="fee">
                             <cellValueFactory>
-                                <javafx.scene.control.cell.PropertyValueFactory property="Fare"/>
+                                <javafx.scene.control.cell.PropertyValueFactory property="Rate"/>
                             </cellValueFactory>
                         </TableColumn>
                         <!-- Parking place -->

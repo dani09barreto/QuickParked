@@ -19,17 +19,17 @@ import java.util.Objects;
  */
 public class ViewManagementController<T> {
 
-    private final T data;
+    private final T controller;
 
     private final HashMap<RealTimeUpdateView<T>, ViewType> associatedViews = new HashMap<>();
 
     /**
      * Create a manager, with specified data
      *
-     * @param data Data to hold, and lend to views
+     * @param controller Data to hold, and lend to views
      */
-    public ViewManagementController(T data) {
-        this.data = data;
+    public ViewManagementController(T controller) {
+        this.controller = controller;
     }
 
     /**
@@ -80,8 +80,8 @@ public class ViewManagementController<T> {
      *
      * @return Data type
      */
-    public T getData() {
-        return data;
+    public T getController() {
+        return controller;
     }
 
     /**

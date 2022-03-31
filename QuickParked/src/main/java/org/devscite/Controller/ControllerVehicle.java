@@ -2,52 +2,65 @@ package org.devscite.Controller;
 
 import org.devscite.Model.Vehicle;
 import org.devscite.Utils.Exeptions.ParkingFull;
+import org.devscite.Utils.Exeptions.VehicleNotExist;
+import org.jetbrains.annotations.Unmodifiable;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class ControllerVehicle {
+
+    /* ---  Private attributes --- */
+
+    /**
+     * Map with all parked vehicles, Key is licensePlate and Value is the Vehicle class
+     */
     private Map<String, Vehicle> vehiclelist = new HashMap<>();
 
+    /**
+     * Map with all recently paid vehicles
+     */
     private Map<String, Vehicle> paidVehiclelist = new HashMap<>();
 
-    public Map<String, Vehicle> getVehiclelist() {
-        return vehiclelist;
+
+    /* ---  Public methods --- */
+
+    /**
+     * Add a vehicle to the parking system
+     *
+     * @param vehicle Vehicle to insert
+     * @return False if vehicle already exists, True if vehicle was inserted correctly
+     * @throws ParkingFull There are no parking slots available
+     */
+    public boolean addVehicle(Vehicle vehicle) throws ParkingFull {
+        // Check if it already exists
+        if (vehiclelist.containsKey(vehicle.getLicensePlate().toUpperCase()))
+            return false;
+
+        // Assign a parking slot
+        vehicle.setParkingPlace(this.parkingSlotAssignment());
+        this.vehiclelist.put(vehicle.getLicensePlate().toUpperCase(), vehicle);
+        return true;
     }
 
-    public Map<String, Vehicle> getPaidVehiclelist() {
-        return paidVehiclelist;
-    }
-
-    public void setVehiclelist(Map<String, Vehicle> vehiclelist) {
-        this.vehiclelist = vehiclelist;
-    }
-
-    public void setPaidVehiclelist(Map<String, Vehicle> paidVehiclelist) {
-        this.paidVehiclelist = paidVehiclelist;
-    }
-
-    public Vehicle vehicleExist(String licensePlate) {
+    /**
+     * Search and Fetch a reference to an existing vehicle in the system
+     *
+     * @param licensePlate Vehicle license plate
+     * @return Vehicle reference or NULL on non-existing vehicles
+     */
+    public Vehicle getVehicle(String licensePlate) {
         if (vehiclelist.containsKey(licensePlate.toUpperCase())) {
             return vehiclelist.get(licensePlate.toUpperCase());
         }
         return null;
     }
 
-    public Map<String, Vehicle> addVehiclePaid(Vehicle vehicle) {
-        if (!paidVehiclelist.containsKey(vehicle.getLicensePlate().toUpperCase())) {
-            paidVehiclelist.put(vehicle.getLicensePlate().toUpperCase(), vehicle);
-        }
-        return this.paidVehiclelist;
-    }
-
     /**
-     * Assign a random parkingSlot
+     * Get a random available parking slot
      *
-     * @return Integer representing parkingSlot
-     * <p>
-     * TODO: Maybe create a parkingSlot controller and a parkingSlot class to represent different types of parking slots
+     * @return Integer representing a parking slot
      */
     public Integer parkingSlotAssignment() throws ParkingFull {
         Random randomizer = new Random(System.currentTimeMillis());
@@ -67,24 +80,78 @@ public class ControllerVehicle {
         // If slot is contained within assignedSlots
         while (assignedSlots.contains(slot)) {
             slot = randomizer.nextInt(ControllerParking.max_parking_slots + 1);
-            System.out.println("Looking for a parking slot");
         }
 
         return slot;
     }
 
-    public boolean addVehicle(Vehicle vehicle) throws ParkingFull {
-        if (vehiclelist.containsKey(vehicle.getLicensePlate().toUpperCase()))
-            return false;
-
-        // Assign a parking slot
-        vehicle.setParkingPlace(this.parkingSlotAssignment());
-        this.vehiclelist.put(vehicle.getLicensePlate().toUpperCase(), vehicle);
-        return true;
+    /**
+     * Returns an IMMUTABLE copy of the vehicles currently parked
+     *
+     * @return IMMUTABLE map of vehicles
+     */
+    public @Unmodifiable Map<String, Vehicle> getVehicles() {
+        return Collections.unmodifiableMap(this.vehiclelist);
     }
 
-    public Map<String, Vehicle> eliminateVehicle(String licencePlate) {
-        vehiclelist.remove(licencePlate.toUpperCase());
-        return this.vehiclelist;
+    /**
+     * Generate a vehicle payment
+     *
+     * @param licenseplate License plate of the vehicle
+     * @return Checked out vehicle
+     * @throws VehicleNotExist Vehicle was not found in the system
+     */
+    public Vehicle generatePayment(String licenseplate) throws VehicleNotExist {
+        Vehicle vehicle = getVehicle(licenseplate.toUpperCase());
+        if (vehicle == null) {
+            throw new VehicleNotExist("No existe el vehículo");
+        }
+        vehicle.setCheckout(Calendar.getInstance());
+        vehicle.calculatePrice();
+
+        // Update lists
+        vehiclelist.remove(licenseplate.toUpperCase());
+        paidVehiclelist.put(licenseplate.toUpperCase(), vehicle);
+
+        return vehicle;
+    }
+
+    /*
+     * TODO: Revisen esta nota en español>
+     *  Los getters y setters de las listas de vehículos fueron marcadas como OBSOLETAS y NO DEBERÍAN USARSE,
+     *  PORQUE EVENTUALMENTE SERÁN ELIMINADAS, esto se debe a que por razones de seguridad NADIE debería modificar
+     *  la lista de vehículos, sólo este controlador debería hacer cambios, y para hacerlo YA EXISTEN otros métodos como
+     *   addVehicle(), payVehicle() y getVehicle()
+     *
+     *  Si se quiere usar una copia de la lista de vehiculos (para renderizar las tablas por ejemplo) se puede utilizar
+     *  el método 'getVehicles()', que retorna una copia INMUTABLE de los vehículos, INMUTABLE significa que no puede ser modificada
+     * */
+
+    @Deprecated
+    public Map<String, Vehicle> getVehiclelist() {
+        return vehiclelist;
+    }
+
+    @Deprecated
+    public Map<String, Vehicle> getPaidVehiclelist() {
+        return paidVehiclelist;
+    }
+
+    @Deprecated
+    public void setVehiclelist(Map<String, Vehicle> vehiclelist) {
+        this.vehiclelist = vehiclelist;
+    }
+
+    @Deprecated
+    public void setPaidVehiclelist(Map<String, Vehicle> paidVehiclelist) {
+        this.paidVehiclelist = paidVehiclelist;
+    }
+
+    @Deprecated
+    public Map<String, Vehicle> addVehiclePaid(Vehicle vehicle) {
+        if (!paidVehiclelist.containsKey(vehicle.getLicensePlate().toUpperCase())) {
+            paidVehiclelist.put(vehicle.getLicensePlate().toUpperCase(), vehicle);
+        }
+        return this.paidVehiclelist;
     }
 }

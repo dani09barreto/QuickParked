@@ -55,6 +55,9 @@ public class ControllerViewParking extends RealTimeUpdateView<ControllerParking>
     private TableView<Vehicle> vehicleTable;
 
     @FXML
+    public TableColumn<Vehicle, String> model;
+
+    @FXML
     public TableColumn<Vehicle, String> plate;
 
     @FXML
@@ -92,7 +95,7 @@ public class ControllerViewParking extends RealTimeUpdateView<ControllerParking>
 
         // Añadir el vehículo
         try {
-            if (!manager.getData().getControllerVehicle().addVehicle(new_vehicle)) {
+            if (!manager.getController().getControllerVehicle().addVehicle(new_vehicle)) {
                 AlertUtils.alertError("Error de inserción", "El vehículo ya está registrado", "Por favor revisa la placa");
                 return;
             }
@@ -113,16 +116,26 @@ public class ControllerViewParking extends RealTimeUpdateView<ControllerParking>
 
     @FXML
     void generatePayment() {
-
+        try {
+            this.manager.createView(
+                    ControllerViewPayment.MAIN_FXML_NAME,
+                    ControllerViewPayment.WINDOW_NAME,
+                    ControllerViewPayment.ICON_NAME,
+                    new Stage(), ViewType.SLAVE_UNIQUE);
+        } catch (ViewException e) {
+            AlertUtils.alertMiniWarning("Error", "Ya tienes una ventana de pago abierta");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void modifyVehicle() {
         try {
             this.manager.createView(
-                    ControllerModifyVehicle.MAIN_FXML_NAME,
-                    ControllerModifyVehicle.WINDOW_NAME,
-                    ControllerModifyVehicle.ICON_NAME,
+                    ControllerViewModifyVehicle.MAIN_FXML_NAME,
+                    ControllerViewModifyVehicle.WINDOW_NAME,
+                    ControllerViewModifyVehicle.ICON_NAME,
                     new Stage(), ViewType.SLAVE_UNIQUE);
         } catch (ViewException e) {
             AlertUtils.alertMiniWarning("Error", "Ya tienes una ventana de modificar abierta");
@@ -142,9 +155,9 @@ public class ControllerViewParking extends RealTimeUpdateView<ControllerParking>
 
     public void updateVehicleList() {
         vehicleTable.getItems().clear();
-        vehicleTable.getItems().addAll(manager.getData().getControllerVehicle().getVehiclelist().values());
+        vehicleTable.getItems().addAll(manager.getController().getControllerVehicle().getVehicles().values());
 
-        if (manager.getData().getControllerVehicle().getVehiclelist().size() > 0) {
+        if (manager.getController().getControllerVehicle().getVehicles().size() > 0) {
             generatePaymentBtn.setDisable(false);
             modifyBtn.setDisable(false);
         } else {
@@ -197,27 +210,3 @@ public class ControllerViewParking extends RealTimeUpdateView<ControllerParking>
 
     }
 }
-
-/*
-    @FXML
-    void generatePayment(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(MAIN_FXML_NAME));
-            Parent root = (Parent) loader.load();
-            ControllerViewPayment controllerPayment = loader.getController();
-            controllerPayment.getControllerParking().getControllerVehicle().setVehiclelist(controllerParking.getControllerVehicle().getVehiclelist());
-            System.out.println(controllerPayment.getControllerParking().getControllerVehicle().getVehiclelist());
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            scene.getStylesheets().add(getClass().getResource(STYLE_SHEET_NAME).toExternalForm());
-            stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream(ICON_NAME))));
-            stage.setTitle(WINDOW_NAME);
-            stage.setScene(scene);
-            stage.setMaximized(false);
-            stage.setResizable(false);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-*/
