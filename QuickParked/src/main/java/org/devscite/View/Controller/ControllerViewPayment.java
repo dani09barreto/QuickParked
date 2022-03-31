@@ -102,7 +102,6 @@ public class ControllerViewPayment extends RealTimeUpdateView<ControllerParking>
                 throw new VehicleNotExist("Error intero, el vehículo no existe");
 
             notifyUpdate();
-            System.out.println("VAL: " + this.labelPrice.getText());
             value -= vehicle.getPrice();
 
         } catch (VehicleNotExist e) {
