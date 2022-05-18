@@ -1,4 +1,4 @@
-package org.devscite.Controller;
+package org.devscite.structure.Controller;
 
 public class ControllerParking {
 
@@ -9,7 +9,7 @@ public class ControllerParking {
      * Controller that handles all vehicles
      */
     private final ControllerVehicle controllerVehicle = new ControllerVehicle();
-
+    private final ControllerUser controllerUser = new ControllerUser();
     /**
      * Get the vehicle controller
      *
@@ -17,5 +17,9 @@ public class ControllerParking {
      */
     public ControllerVehicle getControllerVehicle() {
         return controllerVehicle;
+    }
+
+    public ControllerUser getControllerUser() {
+        return controllerUser;
     }
 }

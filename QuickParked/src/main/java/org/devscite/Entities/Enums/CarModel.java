@@ -1,4 +1,4 @@
-package org.devscite.Model;
+package org.devscite.Entities.Enums;
 
 public enum CarModel {
     Automovil,

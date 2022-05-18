@@ -1,5 +1,6 @@
-package org.devscite.Model;
+package org.devscite.Entities.Model;
 
+import org.devscite.Entities.Enums.CarModel;
 import org.devscite.Utils.Exeptions.InvalidLicensePlate;
 
 import java.text.SimpleDateFormat;

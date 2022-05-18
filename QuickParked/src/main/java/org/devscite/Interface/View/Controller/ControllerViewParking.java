@@ -1,14 +1,14 @@
-package org.devscite.View.Controller;
+package org.devscite.Interface.View.Controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import org.devscite.Controller.ControllerParking;
-import org.devscite.Model.Car;
-import org.devscite.Model.CarModel;
-import org.devscite.Model.MotorCycle;
-import org.devscite.Model.Vehicle;
+import org.devscite.structure.Controller.ControllerParking;
+import org.devscite.Entities.Model.Car;
+import org.devscite.Entities.Enums.CarModel;
+import org.devscite.Entities.Model.MotorCycle;
+import org.devscite.Entities.Model.Vehicle;
 import org.devscite.Utils.AlertUtils;
 import org.devscite.Utils.Exeptions.InvalidLicensePlate;
 import org.devscite.Utils.Exeptions.ParkingFull;
@@ -23,7 +23,7 @@ import java.util.stream.Stream;
 
 public class ControllerViewParking extends RealTimeUpdateView<ControllerParking> implements Initializable {
 
-    public final static String MAIN_FXML_NAME = "../ParkedScene.fxml";
+    public final static String MAIN_FXML_NAME = "../filesFXML/ParkedScene.fxml";
     public final static String WINDOW_NAME = "QuickParked";
     public final static String ICON_NAME = "../img/logo_mini.png";
 

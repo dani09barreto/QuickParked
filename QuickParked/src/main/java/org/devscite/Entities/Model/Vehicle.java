@@ -1,4 +1,4 @@
-package org.devscite.Model;
+package org.devscite.Entities.Model;
 
 import org.devscite.Utils.Exeptions.InvalidLicensePlate;
 

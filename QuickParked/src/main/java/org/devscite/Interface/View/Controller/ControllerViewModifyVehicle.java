@@ -1,4 +1,4 @@
-package org.devscite.View.Controller;
+package org.devscite.Interface.View.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,10 +7,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import org.devscite.Controller.ControllerParking;
-import org.devscite.Model.Car;
-import org.devscite.Model.CarModel;
-import org.devscite.Model.Vehicle;
+import org.devscite.structure.Controller.ControllerParking;
+import org.devscite.Entities.Model.Car;
+import org.devscite.Entities.Enums.CarModel;
+import org.devscite.Entities.Model.Vehicle;
 import org.devscite.Utils.AlertUtils;
 import org.devscite.Utils.Exeptions.InvalidLicensePlate;
 
@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 
 public class ControllerViewModifyVehicle extends RealTimeUpdateView<ControllerParking> implements Initializable {
 
-    public final static String MAIN_FXML_NAME = "../additionalFXML/ModifyScene.fxml";
+    public final static String MAIN_FXML_NAME = "../filesFXML/ModifyScene.fxml";
     public final static String WINDOW_NAME = "Modificar vehículo";
     public final static String ICON_NAME = "../img/logo_mini.png";
 

@@ -1,4 +1,4 @@
-package org.devscite.View.Controller;
+package org.devscite.Interface.View.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
