@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="538.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devscite.Interface.View.Controller.ControllerViewWorkers">
+   <top>
+      <AnchorPane prefHeight="48.0" prefWidth="538.0" style="-fx-background-color: #1190CB;" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="backBtn" layoutX="10.0" layoutY="7.0" mnemonicParsing="false" onAction="#close" prefHeight="16.0" prefWidth="32.0" style="-fx-background-color: #FFFFFFFF; -fx-background-radius: 100;" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="28.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/back-button.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="rigth-bar" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" layoutX="23.0" layoutY="26.0" prefHeight="46.0" prefWidth="246.0" style="-fx-background-color: #1190CB; -fx-background-radius: 12; -fx-label-padding: 5;" text="Mis Trabajadores" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <StackPane layoutX="36.0" layoutY="98.0" prefHeight="292.0" prefWidth="466.0">
+               <children>
+                  <TableView fx:id="workersTable" editable="true" nodeOrientation="LEFT_TO_RIGHT" prefHeight="339.0" prefWidth="699.0">
+                     <columns>
+                        <TableColumn fx:id="idColum" prefWidth="102.0" text="ID">
+                           <cellValueFactory>
+                              <PropertyValueFactory property="TypeVehicle" />
+                           </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="nameColum" prefWidth="128.0" text="Nombre">
+                           <cellValueFactory>
+                              <PropertyValueFactory property="Model" />
+                           </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="documentColum" prefWidth="114.0" text="Cedula">
+                           <cellValueFactory>
+                              <PropertyValueFactory property="LicensePlate" />
+                           </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="celColum" prefWidth="100.0" text="Celudar">
+                           <cellValueFactory>
+                              <PropertyValueFactory property="CheckinFormatted" />
+                           </cellValueFactory>
+                        </TableColumn>
+                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </children>
+            </StackPane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

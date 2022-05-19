@@ -97,7 +97,7 @@
                 </font>
             </Label>
             <StackPane layoutX="24.0" layoutY="90.0" prefHeight="377.0" prefWidth="732.0">
-                <TableView fx:id="vehicleTable" nodeOrientation="LEFT_TO_RIGHT" prefHeight="316.0" prefWidth="743.0">
+                <TableView fx:id="vehicleTable" nodeOrientation="LEFT_TO_RIGHT" prefHeight="339.0" prefWidth="699.0">
                     <columns>
                         <TableColumn prefWidth="75.0" text="Vehículo">
                             <cellValueFactory>
