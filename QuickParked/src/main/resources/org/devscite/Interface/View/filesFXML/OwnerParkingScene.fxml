@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="879.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devscite.Interface.View.Controller.ControllerViewOwnerParking">
+   <top>
+      <AnchorPane prefHeight="45.0" prefWidth="872.0" style="-fx-background-color: #1190CB;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="728.0" layoutY="12.0" text="Cerrar Sesión" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnLogOut" layoutX="829.0" layoutY="9.0" mnemonicParsing="false" onAction="#logOut" prefWidth="39.0" style="-fx-background-color: #FFFFFFFF; -fx-background-radius: 10;">
+               <graphic>
+                  <ImageView fitHeight="17.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/logout.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="rigth-bar" BorderPane.alignment="CENTER">
+         <children>
+            <Separator layoutX="438.0" layoutY="3.0" orientation="VERTICAL" prefHeight="474.0" prefWidth="13.0" />
+            <TextField fx:id="nameParkingLabel" layoutX="50.0" layoutY="136.0" styleClass="search-bar" />
+            <TextField fx:id="addressParkingLabel" layoutX="251.0" layoutY="136.0" styleClass="search-bar" />
+            <Label layoutX="50.0" layoutY="112.0" text="Nombre ">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="251.0" layoutY="112.0" text="Dirección">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="51.0" layoutY="195.0" prefHeight="32.0" prefWidth="153.0" style="-fx-background-color: #1190CB; -fx-background-radius: 12; -fx-label-padding: 3;" text="Tarifa por minuto" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="41.0" layoutY="34.0" prefHeight="46.0" prefWidth="281.0" style="-fx-background-color: #1190CB; -fx-background-radius: 12; -fx-label-padding: 5;" text="Información Parqueadero" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <ImageView layoutX="62.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/car.png" />
+               </image>
+            </ImageView>
+            <ImageView layoutX="251.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/motocross.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="112.0" layoutY="262.0" text="\$">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="301.0" layoutY="262.0" text="\$">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="fireCareLabel" layoutX="128.0" layoutY="259.0" prefHeight="25.0" prefWidth="37.0" styleClass="search-bar" />
+            <TextField fx:id="fireCycleLabel" layoutX="315.0" layoutY="259.0" prefHeight="25.0" prefWidth="37.0" styleClass="search-bar" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="312.0" prefHeight="32.0" prefWidth="223.0" style="-fx-background-color: #1190CB; -fx-background-radius: 12; -fx-label-padding: 3;" text="Cantidad de Parqueaderos" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="65.0" layoutY="366.0" text="Comunes">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="254.0" layoutY="366.0" text="Electricos">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="comunsSlotsLabel" layoutX="132.0" layoutY="364.0" prefHeight="25.0" prefWidth="39.0" styleClass="search-bar" />
+            <TextField fx:id="electricSlotsLabel" layoutX="327.0" layoutY="364.0" prefHeight="25.0" prefWidth="43.0" styleClass="search-bar" />
+            <Button fx:id="btnAddParking" layoutX="314.0" layoutY="422.0" mnemonicParsing="false" onAction="#addInfoParking" style="-fx-background-color: #1190CB; -fx-background-radius: 100;" text="Agregar" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Label alignment="CENTER" layoutX="477.0" layoutY="34.0" prefHeight="46.0" prefWidth="246.0" style="-fx-background-color: #1190CB; -fx-background-radius: 12; -fx-label-padding: 5;" text="Trabajadores" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <TextField fx:id="nameWorkerLabel" layoutX="473.0" layoutY="136.0" styleClass="search-bar" />
+            <Label layoutX="473.0" layoutY="112.0" text="Nombre ">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="documentWorkerLabel" layoutX="664.0" layoutY="132.0" styleClass="search-bar" />
+            <Label layoutX="664.0" layoutY="108.0" text="Cedula">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="477.0" layoutY="233.0" text="Contraseña">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="celWorkerLabel" layoutX="473.0" layoutY="195.0" styleClass="search-bar" />
+            <Label layoutX="473.0" layoutY="171.0" text="Celular">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField layoutX="664.0" layoutY="195.0" styleClass="search-bar" />
+            <Label layoutX="664.0" layoutY="171.0" text="Nombre Usuario">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="passWorkerLabel" layoutX="473.0" layoutY="259.0" styleClass="search-bar" />
+            <Button fx:id="btnAddWorker" layoutX="479.0" layoutY="422.0" mnemonicParsing="false" onAction="#addWorker" style="-fx-background-color: #1190CB; -fx-background-radius: 100;" text="Agregar" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="listWorkers" layoutX="721.0" layoutY="422.0" mnemonicParsing="false" onAction="#listWorkers" style="-fx-background-color: #1190CB; -fx-background-radius: 100;" text="Mis trabajadores" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="106.0" fitWidth="114.0" layoutX="686.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/profile.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
