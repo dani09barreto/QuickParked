@@ -1,5 +1,6 @@
 package org.devscite.Interface.View.Controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -17,6 +18,7 @@ import org.devscite.Utils.ViewType;
 
 import java.net.URL;
 import java.util.Calendar;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -29,6 +31,9 @@ public class ControllerViewParking extends RealTimeUpdateView<ControllerParking>
 
     @FXML
     public Button addVehicleBtn;
+
+    @FXML
+    private Button btnLogOut;
 
     @FXML
     public ToggleGroup type_vehicle;
@@ -70,7 +75,7 @@ public class ControllerViewParking extends RealTimeUpdateView<ControllerParking>
     public TableColumn<Vehicle, Integer> place;
 
     @FXML
-    void addVehicle() {
+    void addVehicle(ActionEvent event) {
         Vehicle new_vehicle;
         // Crear el vehículo
         // NOTA: Los vehículos siempre se guardan con placas en MAYÚSCULAS
@@ -115,7 +120,7 @@ public class ControllerViewParking extends RealTimeUpdateView<ControllerParking>
     }
 
     @FXML
-    void generatePayment() {
+    void generatePayment(ActionEvent event) {
         try {
             this.manager.createView(
                     ControllerViewPayment.MAIN_FXML_NAME,
@@ -130,7 +135,7 @@ public class ControllerViewParking extends RealTimeUpdateView<ControllerParking>
     }
 
     @FXML
-    void modifyVehicle() {
+    void modifyVehicle(ActionEvent event) {
         try {
             this.manager.createView(
                     ControllerViewModifyVehicle.MAIN_FXML_NAME,
@@ -145,7 +150,7 @@ public class ControllerViewParking extends RealTimeUpdateView<ControllerParking>
     }
 
     @FXML
-    void selectedType() {
+    void selectedType(ActionEvent event) {
         if (selectedCar.isSelected()) {
             vehicleTypesCar();
         } else if (selectedMotorcycle.isSelected()) {

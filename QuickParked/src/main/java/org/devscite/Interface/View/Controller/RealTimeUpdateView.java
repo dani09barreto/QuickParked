@@ -3,7 +3,12 @@ package org.devscite.Interface.View.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
+import org.devscite.Utils.AlertUtils;
+import org.devscite.Utils.ViewType;
+
+import java.util.Optional;
 
 public abstract class RealTimeUpdateView<T> {
 
@@ -50,5 +55,18 @@ public abstract class RealTimeUpdateView<T> {
         this.manager.optOut(this);
         this.onExit();
         ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
+    }
+
+    @FXML
+    void logOut(ActionEvent event) throws Exception {
+        Optional<ButtonType> option = AlertUtils.alertConfirmation("Cerrar Sesion", "¿Esta seguro de que quiere cerrar la Sesion?", "");
+        if (option.get().equals(ButtonType.OK)){
+            this.manager.createView(
+                    ControllerViewUser.MAIN_FXML_NAME,
+                    ControllerViewUser.WINDOW_NAME,
+                    ControllerViewUser.ICON_NAME, new Stage(), ViewType.SLAVE_UNIQUE
+            );
+            close(event);
+        }
     }
 }

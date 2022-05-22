@@ -20,9 +20,9 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <Button layoutX="832.0" layoutY="9.0" mnemonicParsing="false" prefWidth="39.0" style="-fx-background-color: #FFFFFFFF; -fx-background-radius: 10;">
+            <Button fx:id="btnLogOut" layoutX="829.0" layoutY="9.0" mnemonicParsing="false" onAction="#logOut" prefWidth="39.0" style="-fx-background-color: #FFFFFFFF; -fx-background-radius: 10;">
                <graphic>
-                  <ImageView fx:id="btnLogOut" fitHeight="17.0" fitWidth="25.0" onDragDetected="#logOutView" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="17.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/logout.png" />
                      </image>

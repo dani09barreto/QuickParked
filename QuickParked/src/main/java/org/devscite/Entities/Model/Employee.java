@@ -1,14 +1,15 @@
 package org.devscite.Entities.Model;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
-public class Employee extends User{
+public class Employee extends UserParking {
     private UUID id;
     private String name;
-    private Integer document;
-    private Integer number;
+    private BigDecimal document;
+    private BigDecimal number;
 
-    public Employee(String username, String passWord ,UUID id, String name, Integer document, Integer number) {
+    public Employee(String username, String passWord , String name, BigDecimal document, BigDecimal number) {
         super(username, passWord);
         this.id = UUID.randomUUID();
         this.name = name;
@@ -32,19 +33,19 @@ public class Employee extends User{
         this.name = name;
     }
 
-    public Integer getDocument() {
+    public BigDecimal getDocument() {
         return document;
     }
 
-    public void setDocument(Integer document) {
+    public void setDocument(BigDecimal document) {
         this.document = document;
     }
 
-    public Integer getNumber() {
+    public BigDecimal getNumber() {
         return number;
     }
 
-    public void setNumber(Integer number) {
+    public void setNumber(BigDecimal number) {
         this.number = number;
     }
 }

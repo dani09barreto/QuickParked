@@ -4,13 +4,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import org.devscite.Utils.AlertUtils;
+import org.devscite.Utils.ViewType;
 import org.devscite.structure.Controller.ControllerParking;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ControllerViewOwnerParking extends RealTimeUpdateView<ControllerParking> implements Initializable {
@@ -29,7 +34,7 @@ public class ControllerViewOwnerParking extends RealTimeUpdateView<ControllerPar
     private Button btnAddWorker;
 
     @FXML
-    private ImageView btnLogOut;
+    private Button btnLogOut;
 
     @FXML
     private TextField celWorkerLabel;
@@ -73,11 +78,6 @@ public class ControllerViewOwnerParking extends RealTimeUpdateView<ControllerPar
 
     @FXML
     void listWorkers(ActionEvent event) {
-
-    }
-
-    @FXML
-    void logOutView(MouseEvent event) {
 
     }
 

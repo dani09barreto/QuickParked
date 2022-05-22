@@ -1,12 +1,14 @@
 package org.devscite.Aplication.persistence;
 
-import org.devscite.Entities.Model.User;
+import org.devscite.Entities.Model.UserParking;
+import org.devscite.Utils.Exeptions.InvalidUser;
 
 import java.util.ArrayList;
 
 public interface IUserDAO {
-    void addUser(User user);
-    void updateUser(User user);
-    void deleteUser(User user);
-    ArrayList<User> listUsers ();
+    void addUser(UserParking userParking);
+    void updateUser(UserParking userParking);
+    void deleteUser(UserParking userParking);
+    ArrayList<UserParking> listUsers ();
+    UserParking searchUser(String username, String passWord) throws InvalidUser;
 }

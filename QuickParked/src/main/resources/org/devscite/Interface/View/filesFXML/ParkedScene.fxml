@@ -21,7 +21,7 @@
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="577.0" prefWidth="1116.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devscite.Interface.View.Controller.ControllerViewParking">
     <top>
         <AnchorPane prefHeight="46.0" prefWidth="1009.0" style="-fx-background-color: #1190CB;" styleClass="top-bar" BorderPane.alignment="CENTER">
-            <Button layoutX="1063.0" layoutY="11.0" mnemonicParsing="false" prefWidth="39.0" style="-fx-background-color: #FFFFFFFF; -fx-background-radius: 10;">
+            <Button fx:id="btnLogOut" layoutX="1063.0" layoutY="11.0" mnemonicParsing="false" onAction="#logOut" prefWidth="39.0" style="-fx-background-color: #FFFFFFFF; -fx-background-radius: 10;">
                 <graphic>
                     <ImageView fitHeight="17.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                         <Image url="@../img/logout.png" />

@@ -1,12 +1,11 @@
 package org.devscite.Interface.View.Controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import org.devscite.Entities.Model.User;
+import org.devscite.Entities.Model.UserParking;
 import org.devscite.structure.Controller.ControllerParking;
 
 import java.net.URL;
@@ -22,19 +21,19 @@ public class ControllerViewWorkers extends RealTimeUpdateView<ControllerParking>
     private Button backBtn;
 
     @FXML
-    private TableColumn<User, Integer> celColum;
+    private TableColumn<UserParking, Integer> celColum;
 
     @FXML
-    private TableColumn<User, Integer> documentColum;
+    private TableColumn<UserParking, Integer> documentColum;
 
     @FXML
-    private TableColumn<User, UUID> idColum;
+    private TableColumn<UserParking, UUID> idColum;
 
     @FXML
-    private TableColumn<User, String> nameColum;
+    private TableColumn<UserParking, String> nameColum;
 
     @FXML
-    private TableView<User> workersTable;
+    private TableView<UserParking> workersTable;
 
     @Override
     public void onUpdate() {

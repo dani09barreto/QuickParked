@@ -58,9 +58,9 @@ public class App extends Application {
         generateDebugData();
 
         viewManager.createView(
-                ControllerViewParking.MAIN_FXML_NAME,
-                ControllerViewParking.WINDOW_NAME,
-                ControllerViewParking.ICON_NAME, stage, ViewType.MASTER);
+                ControllerViewUser.MAIN_FXML_NAME,
+                ControllerViewUser.WINDOW_NAME,
+                ControllerViewUser.ICON_NAME, stage, ViewType.SLAVE);
     }
 
     public static void main(String[] args) {
