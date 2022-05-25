@@ -34,15 +34,14 @@ public class UserDAOImpl implements IUserDAO{
 
     @Override
     public UserParking searchUser(String username, String passWord) throws InvalidUser {
-        Integer registros = 0;
+        int registros = 0;
         UserParking userParking = null;
-        StringBuilder SQL =
-                new StringBuilder("select USERPARKING.USERNAME, EMPLOYEE.USERID, USERPARKING.PASSWORD, EMPLOYEE.NAME, EMPLOYEE.DOCUMENT, EMPLOYEE.CELLPHONE\n" +
-                        "from USERPARKING, EMPLOYEE\n" +
-                        "where USERPARKING.ID = EMPLOYEE.USERID and USERPARKING.USERNAME = ? and USERPARKING.PASSWORD = ?");
+        String SQL = "select USERPARKING.USERNAME, EMPLOYEE.USERID, USERPARKING.PASSWORD, EMPLOYEE.NAME, EMPLOYEE.DOCUMENT, EMPLOYEE.CELLPHONE\n" +
+                             "from USERPARKING, EMPLOYEE\n" +
+                             "where USERPARKING.ID = EMPLOYEE.USERID and USERPARKING.USERNAME = ? and USERPARKING.PASSWORD = ?";
         try (
                 Connection conex = DriverManager.getConnection(Constants.THINCONN, Constants.USERNAME, Constants.PASSWORD);
-                PreparedStatement ps = conex.prepareStatement(SQL.toString())) {
+                PreparedStatement ps = conex.prepareStatement(SQL)) {
             //se asignan los valores a los parametros
             ps.setString(1, username);
             ps.setString(2, passWord);
@@ -53,7 +52,7 @@ public class UserDAOImpl implements IUserDAO{
                 }
             }
         } catch (SQLException ex) {
-            System.out.println("Error de conexion:" + ex.toString());
+            System.out.println("Error de conexion:" + ex);
             ex.printStackTrace();
         }
         if (registros == 0){
@@ -64,7 +63,6 @@ public class UserDAOImpl implements IUserDAO{
     public UserParking bulidUsers (final ResultSet rs) throws SQLException {
         UserParking us;
         if (rs.getInt("USERID") == 4){
-            System.out.println("aaaaa");
             us = new Admin(
                     rs.getString("USERNAME"),
                     rs.getString("PASSWORD")

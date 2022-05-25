@@ -50,7 +50,6 @@ public class ViewManagementObserver {
      * @throws ViewException a MASTER or same type UNIQUE_SLAVE already existed
      */
     public void subscribe(RealTimeObservableView view, ViewType type) throws ViewException {
-        System.out.println(view.getClass().getName() + " has subscribed!");
         // Check type
         if (type == ViewType.MASTER && this.associatedViews.containsValue(ViewType.MASTER))
             throw new ViewException("Master view already exists");
