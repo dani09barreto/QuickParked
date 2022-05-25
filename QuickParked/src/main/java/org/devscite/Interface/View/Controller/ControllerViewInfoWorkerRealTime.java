@@ -4,12 +4,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import org.devscite.structure.Controller.ControllerParking;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ControllerViewInfoWorker extends RealTimeUpdateView<ControllerParking> implements Initializable {
+public class ControllerViewInfoWorkerRealTime extends RealTimeObservableView implements Initializable {
     public final static String MAIN_FXML_NAME = "../filesFXML/infoWorkerScene.fxml";
     public final static String WINDOW_NAME = "Informacion Trabajador";
     public final static String ICON_NAME = "../img/logo_mini.png";

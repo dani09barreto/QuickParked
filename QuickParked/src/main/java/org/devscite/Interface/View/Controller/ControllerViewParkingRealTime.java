@@ -18,12 +18,11 @@ import org.devscite.Utils.ViewType;
 
 import java.net.URL;
 import java.util.Calendar;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class ControllerViewParking extends RealTimeUpdateView<ControllerParking> implements Initializable {
+public class ControllerViewParkingRealTime extends RealTimeObservableView implements Initializable {
 
     public final static String MAIN_FXML_NAME = "../filesFXML/ParkedScene.fxml";
     public final static String WINDOW_NAME = "QuickParked";
@@ -100,7 +99,7 @@ public class ControllerViewParking extends RealTimeUpdateView<ControllerParking>
 
         // Añadir el vehículo
         try {
-            if (!manager.getController().getControllerVehicle().addVehicle(new_vehicle)) {
+            if (!ControllerParking.getInstance().getControllerVehicle().addVehicle(new_vehicle)) {
                 AlertUtils.alertError("Error de inserción", "El vehículo ya está registrado", "Por favor revisa la placa");
                 return;
             }
@@ -122,10 +121,10 @@ public class ControllerViewParking extends RealTimeUpdateView<ControllerParking>
     @FXML
     void generatePayment(ActionEvent event) {
         try {
-            this.manager.createView(
-                    ControllerViewPayment.MAIN_FXML_NAME,
-                    ControllerViewPayment.WINDOW_NAME,
-                    ControllerViewPayment.ICON_NAME,
+            this.observer.createView(
+                    ControllerViewPaymentRealTime.MAIN_FXML_NAME,
+                    ControllerViewPaymentRealTime.WINDOW_NAME,
+                    ControllerViewPaymentRealTime.ICON_NAME,
                     new Stage(), ViewType.SLAVE_UNIQUE);
         } catch (ViewException e) {
             AlertUtils.alertMiniWarning("Error", "Ya tienes una ventana de pago abierta");
@@ -137,10 +136,10 @@ public class ControllerViewParking extends RealTimeUpdateView<ControllerParking>
     @FXML
     void modifyVehicle(ActionEvent event) {
         try {
-            this.manager.createView(
-                    ControllerViewModifyVehicle.MAIN_FXML_NAME,
-                    ControllerViewModifyVehicle.WINDOW_NAME,
-                    ControllerViewModifyVehicle.ICON_NAME,
+            this.observer.createView(
+                    ControllerViewModifyVehicleRealTime.MAIN_FXML_NAME,
+                    ControllerViewModifyVehicleRealTime.WINDOW_NAME,
+                    ControllerViewModifyVehicleRealTime.ICON_NAME,
                     new Stage(), ViewType.SLAVE_UNIQUE);
         } catch (ViewException e) {
             AlertUtils.alertMiniWarning("Error", "Ya tienes una ventana de modificar abierta");
@@ -160,9 +159,9 @@ public class ControllerViewParking extends RealTimeUpdateView<ControllerParking>
 
     public void updateVehicleList() {
         vehicleTable.getItems().clear();
-        vehicleTable.getItems().addAll(manager.getController().getControllerVehicle().getVehicles().values());
+        vehicleTable.getItems().addAll(ControllerParking.getInstance().getControllerVehicle().getVehicles().values());
 
-        if (manager.getController().getControllerVehicle().getVehicles().size() > 0) {
+        if (ControllerParking.getInstance().getControllerVehicle().getVehicles().size() > 0) {
             generatePaymentBtn.setDisable(false);
             modifyBtn.setDisable(false);
         } else {

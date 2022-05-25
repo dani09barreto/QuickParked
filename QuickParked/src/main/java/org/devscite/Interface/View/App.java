@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class App extends Application {
 
-    final ViewManagementController<ControllerParking> viewManager = new ViewManagementController<>(new ControllerParking());
+    final ViewManagementObserver viewManager = new ViewManagementObserver();
 
     private void generateDebugData() {
         //TODO: DEBUG
@@ -31,7 +31,7 @@ public class App extends Application {
                             alphabet.charAt(random.nextInt(alphabet.length())),
                             alphabet.charAt(random.nextInt(alphabet.length()))}) + random.nextInt(1000);
                     try {
-                        viewManager.getController().getControllerVehicle().addVehicle(new Car(randomPlate, Calendar.getInstance(), CarModel.values()[random.nextInt(4)]));
+                        ControllerParking.getInstance().getControllerVehicle().addVehicle(new Car(randomPlate, Calendar.getInstance(), CarModel.values()[random.nextInt(4)]));
                     } catch (Exception ignored) {
 
                     }
@@ -42,7 +42,7 @@ public class App extends Application {
                             alphabet.charAt(random.nextInt(alphabet.length())),
                             alphabet.charAt(random.nextInt(alphabet.length()))}) + random.nextInt(100) + alphabet.charAt(random.nextInt(alphabet.length()));
                     try {
-                        viewManager.getController().getControllerVehicle().addVehicle(new MotorCycle(randomPlate, Calendar.getInstance()));
+                        ControllerParking.getInstance().getControllerVehicle().addVehicle(new MotorCycle(randomPlate, Calendar.getInstance()));
                     } catch (Exception ignored) {
 
                     }
@@ -58,9 +58,9 @@ public class App extends Application {
         generateDebugData();
 
         viewManager.createView(
-                ControllerViewUser.MAIN_FXML_NAME,
-                ControllerViewUser.WINDOW_NAME,
-                ControllerViewUser.ICON_NAME, stage, ViewType.SLAVE);
+                ControllerViewUserRealTime.MAIN_FXML_NAME,
+                ControllerViewUserRealTime.WINDOW_NAME,
+                ControllerViewUserRealTime.ICON_NAME, stage, ViewType.SLAVE);
     }
 
     public static void main(String[] args) {
