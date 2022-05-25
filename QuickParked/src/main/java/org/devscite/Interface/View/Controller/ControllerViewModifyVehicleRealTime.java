@@ -17,7 +17,7 @@ import org.devscite.Utils.Exeptions.InvalidLicensePlate;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ControllerViewModifyVehicle extends RealTimeUpdateView<ControllerParking> implements Initializable {
+public class ControllerViewModifyVehicleRealTime extends RealTimeObservableView implements Initializable {
 
     public final static String MAIN_FXML_NAME = "../filesFXML/ModifyScene.fxml";
     public final static String WINDOW_NAME = "Modificar vehículo";
@@ -40,7 +40,7 @@ public class ControllerViewModifyVehicle extends RealTimeUpdateView<ControllerPa
 
     void updatePlateList() {
         platesList.getItems().clear();
-        platesList.getItems().setAll(manager.getController().getControllerVehicle().getVehicles().keySet());
+        platesList.getItems().setAll(ControllerParking.getInstance().getControllerVehicle().getVehicles().keySet());
     }
 
     @Override
@@ -63,7 +63,7 @@ public class ControllerViewModifyVehicle extends RealTimeUpdateView<ControllerPa
         String plate = platesList.getSelectionModel().getSelectedItem();
         if (plate != null) {
             // Show plate info into fields
-            Vehicle vehicle = manager.getController().getControllerVehicle().getVehicle(plate);
+            Vehicle vehicle = ControllerParking.getInstance().getControllerVehicle().getVehicle(plate);
             plateTextField.setText(plate);
 
             // Set Car Model
@@ -80,7 +80,7 @@ public class ControllerViewModifyVehicle extends RealTimeUpdateView<ControllerPa
     void makeModify(ActionEvent event) {
         try {
             String placaModificar = platesList.getSelectionModel().getSelectedItem();
-            Vehicle vehicle = manager.getController().getControllerVehicle().getVehicle(placaModificar);
+            Vehicle vehicle = ControllerParking.getInstance().getControllerVehicle().getVehicle(placaModificar);
 
             String nuevaPlaca = plateTextField.getText();
             vehicle.setLicensePlate(nuevaPlaca);

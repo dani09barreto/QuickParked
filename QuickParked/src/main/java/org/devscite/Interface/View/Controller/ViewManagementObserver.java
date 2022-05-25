@@ -13,31 +13,18 @@ import java.util.HashMap;
 import java.util.Objects;
 
 /**
- * Class that manages all views, is the owner of the data and lends it to the view (RealTimeUpdateView)
- *
- * @param <T>
+ * Class that manages all real time viws
  */
-public class ViewManagementController<T> {
+public class ViewManagementObserver {
 
-    private final T controller;
-
-    private final HashMap<RealTimeUpdateView<T>, ViewType> associatedViews = new HashMap<>();
-
-    /**
-     * Create a manager, with specified data
-     *
-     * @param controller Data to hold, and lend to views
-     */
-    public ViewManagementController(T controller) {
-        this.controller = controller;
-    }
+    private final HashMap<RealTimeObservableView, ViewType> associatedViews = new HashMap<>();
 
     /**
      * When a associated RealTimeUpdateView updates the controller
      * Notify and Update every associated RealTimeUpdateView
      */
     public void notifyUpdate() {
-        associatedViews.keySet().forEach(RealTimeUpdateView::onUpdate);
+        associatedViews.keySet().forEach(RealTimeObservableView::onUpdate);
     }
 
     /**
@@ -45,7 +32,7 @@ public class ViewManagementController<T> {
      *
      * @param view View to remove
      */
-    public void optOut(RealTimeUpdateView<T> view) {
+    public void unsuscribe(RealTimeObservableView view) {
 
         // Check if this is a master view
         if (this.associatedViews.get(view) == ViewType.MASTER) {
@@ -56,19 +43,20 @@ public class ViewManagementController<T> {
     }
 
     /**
-     * Attach a view to the manager
+     * Subscribe a View to the Observer
      *
-     * @param view View to attach
-     * @param type Type of view
-     * @throws ViewException View cannot be created because of view type
+     * @param view View to subscribe, Must be ObservableView
+     * @param type ViewType MASTER or SLAVE
+     * @throws ViewException a MASTER or same type UNIQUE_SLAVE already existed
      */
-    public void optIn(RealTimeUpdateView<T> view, ViewType type) throws ViewException {
+    public void subscribe(RealTimeObservableView view, ViewType type) throws ViewException {
         // Check type
         if (type == ViewType.MASTER && this.associatedViews.containsValue(ViewType.MASTER))
             throw new ViewException("Master view already exists");
         else if (type == ViewType.SLAVE_UNIQUE) {
-            for (RealTimeUpdateView<T> v : this.associatedViews.keySet()) {
-                if (v.getClass() == view.getClass()) throw new ViewException("Slave view already exists");
+            for (RealTimeObservableView v : this.associatedViews.keySet()) {
+                if (v.getClass().getName().equals(view.getClass().getName()))
+                    throw new ViewException("Slave view already exists");
             }
         }
 
@@ -76,16 +64,7 @@ public class ViewManagementController<T> {
     }
 
     /**
-     * Get inner data
-     *
-     * @return Data type
-     */
-    public T getController() {
-        return controller;
-    }
-
-    /**
-     * Create a new View
+     * Create a new View and automatically subscribe it
      *
      * @param fxml  FXML file path
      * @param title Window title
@@ -98,15 +77,14 @@ public class ViewManagementController<T> {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
         Parent root = loader.load();
 
-        RealTimeUpdateView<T> viewController = Objects.requireNonNull(loader.getController());
-        viewController.attachManager(this);
-        this.optIn(Objects.requireNonNull(viewController), type);
+        RealTimeObservableView viewController = Objects.requireNonNull(loader.getController());
+        viewController.subscribe(this, type);
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("../styles.css")).toExternalForm());
 
         stage.setOnCloseRequest(windowEvent -> {
-            optOut(viewController);
+            unsuscribe(viewController);
             viewController.onExit();
         });
 

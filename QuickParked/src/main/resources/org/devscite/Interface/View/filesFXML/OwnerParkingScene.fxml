@@ -11,11 +11,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="879.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devscite.Interface.View.Controller.ControllerViewOwnerParking">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="879.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devscite.Interface.View.Controller.ControllerViewOwnerParkingRealTime">
    <top>
       <AnchorPane prefHeight="45.0" prefWidth="872.0" style="-fx-background-color: #1190CB;" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="728.0" layoutY="12.0" text="Cerrar Sesión" textFill="WHITE">
+            <Label layoutX="720.0" layoutY="12.0" text="Cerrar Sesión" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
@@ -32,7 +32,7 @@
          </children>
       </AnchorPane>
    </top>
-   <center>
+   <left>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="rigth-bar" BorderPane.alignment="CENTER">
          <children>
             <Separator layoutX="438.0" layoutY="3.0" orientation="VERTICAL" prefHeight="474.0" prefWidth="13.0" />
@@ -48,12 +48,12 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="51.0" layoutY="195.0" prefHeight="32.0" prefWidth="153.0" style="-fx-background-color: #1190CB; -fx-background-radius: 12; -fx-label-padding: 3;" text="Tarifa por minuto" textAlignment="CENTER" textFill="WHITE">
+            <Label alignment="CENTER" layoutX="51.0" layoutY="195.0" prefHeight="32.0" prefWidth="202.0" style="-fx-background-color: #1190CB; -fx-background-radius: 12; -fx-label-padding: 3;" text="Tarifa por minuto" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="41.0" layoutY="34.0" prefHeight="46.0" prefWidth="281.0" style="-fx-background-color: #1190CB; -fx-background-radius: 12; -fx-label-padding: 5;" text="Información Parqueadero" textAlignment="CENTER" textFill="WHITE">
+            <Label alignment="CENTER" layoutX="41.0" layoutY="34.0" prefHeight="46.0" prefWidth="318.0" style="-fx-background-color: #1190CB; -fx-background-radius: 12; -fx-label-padding: 5;" text="Información Parqueadero" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="22.0" />
                </font>
@@ -78,26 +78,26 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="fireCareLabel" layoutX="128.0" layoutY="259.0" prefHeight="25.0" prefWidth="37.0" styleClass="search-bar" />
-            <TextField fx:id="fireCycleLabel" layoutX="315.0" layoutY="259.0" prefHeight="25.0" prefWidth="37.0" styleClass="search-bar" />
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="312.0" prefHeight="32.0" prefWidth="223.0" style="-fx-background-color: #1190CB; -fx-background-radius: 12; -fx-label-padding: 3;" text="Cantidad de Parqueaderos" textFill="WHITE">
+            <TextField fx:id="fireCareLabel" layoutX="128.0" layoutY="259.0" prefHeight="25.0" prefWidth="57.0" styleClass="search-bar" />
+            <TextField fx:id="fireCycleLabel" layoutX="315.0" layoutY="259.0" prefHeight="25.0" prefWidth="57.0" styleClass="search-bar" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="312.0" prefHeight="32.0" prefWidth="265.0" style="-fx-background-color: #1190CB; -fx-background-radius: 12; -fx-label-padding: 3;" text="Cantidad de Parqueaderos" textFill="WHITE">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label layoutX="65.0" layoutY="366.0" text="Comunes">
+            <Label layoutX="61.0" layoutY="367.0" text="Comunes">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="254.0" layoutY="366.0" text="Electricos">
+            <Label layoutX="200.0" layoutY="367.0" text="Electricos">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="comunsSlotsLabel" layoutX="132.0" layoutY="364.0" prefHeight="25.0" prefWidth="39.0" styleClass="search-bar" />
-            <TextField fx:id="electricSlotsLabel" layoutX="327.0" layoutY="364.0" prefHeight="25.0" prefWidth="43.0" styleClass="search-bar" />
-            <Button fx:id="btnAddParking" layoutX="314.0" layoutY="422.0" mnemonicParsing="false" onAction="#addInfoParking" style="-fx-background-color: #1190CB; -fx-background-radius: 100;" text="Agregar" textFill="WHITE">
+            <TextField fx:id="comunesSlotsLabel" layoutX="136.0" layoutY="363.0" prefHeight="25.0" prefWidth="39.0" styleClass="search-bar" />
+            <TextField fx:id="electricosSlotsLabel" layoutX="280.0" layoutY="363.0" prefHeight="25.0" prefWidth="43.0" styleClass="search-bar" />
+            <Button fx:id="btnAddParking" layoutX="306.0" layoutY="422.0" mnemonicParsing="false" onAction="#addInfoParking" prefHeight="29.0" prefWidth="107.0" style="-fx-background-color: #1190CB; -fx-background-radius: 100;" text="Actualizar" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
@@ -152,7 +152,19 @@
                   <Image url="@../img/profile.png" />
                </image>
             </ImageView>
+            <Label layoutX="60.0" layoutY="401.0" text="Motos">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="motosSlotsLabel" layoutX="116.0" layoutY="398.0" prefHeight="25.0" prefWidth="39.0" styleClass="search-bar" />
+            <Label layoutX="175.0" layoutY="401.0" text="Grandes">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="grandesSlotsLabel" layoutX="247.0" layoutY="398.0" prefHeight="25.0" prefWidth="43.0" styleClass="search-bar" />
          </children>
       </AnchorPane>
-   </center>
+   </left>
 </BorderPane>

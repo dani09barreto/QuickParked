@@ -16,7 +16,7 @@ import org.devscite.structure.Controller.ControllerParking;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ControllerViewUser extends RealTimeUpdateView<ControllerParking> implements Initializable {
+public class ControllerViewUserRealTime extends RealTimeObservableView implements Initializable {
     public final static String MAIN_FXML_NAME = "../filesFXML/SceneLogin.fxml";
     public final static String WINDOW_NAME = "QuickParked";
     public final static String ICON_NAME = "../img/logo_mini.png";
@@ -36,25 +36,27 @@ public class ControllerViewUser extends RealTimeUpdateView<ControllerParking> im
         this.passwordField.setText("");
         this.userField.setText("");
     }
+
     @FXML
     void logIn(ActionEvent event) {
+        // Obtain the login credentials
         String username = userField.getText();
         String password = passwordField.getText();
-        UserParking userlogIn = null;
+        UserParking userlogIn;
+
         try {
-            userlogIn = manager.getController().getControllerUser().getiUserDAO().searchUser(username, password);
-            if (userlogIn instanceof Employee){
-                this.manager.createView(
-                        ControllerViewParking.MAIN_FXML_NAME,
-                        ControllerViewParking.WINDOW_NAME,
-                        ControllerViewParking.ICON_NAME, new Stage(), ViewType.SLAVE_UNIQUE);
+            userlogIn = ControllerParking.getInstance().getControllerUser().getiUserDAO().searchUser(username, password);
+            if (userlogIn instanceof Employee) {
+                this.observer.createView(
+                        ControllerViewParkingRealTime.MAIN_FXML_NAME,
+                        ControllerViewParkingRealTime.WINDOW_NAME,
+                        ControllerViewParkingRealTime.ICON_NAME, new Stage(), ViewType.SLAVE_UNIQUE);
                 close(event);
-            }
-            else if (userlogIn instanceof Admin){
-                this.manager.createView(
-                        ControllerViewOwnerParking.MAIN_FXML_NAME,
-                        ControllerViewOwnerParking.WINDOW_NAME,
-                        ControllerViewOwnerParking.ICON_NAME, new Stage(), ViewType.SLAVE_UNIQUE);
+            } else if (userlogIn instanceof Admin) {
+                this.observer.createView(
+                        ControllerViewOwnerParkingRealTime.MAIN_FXML_NAME,
+                        ControllerViewOwnerParkingRealTime.WINDOW_NAME,
+                        ControllerViewOwnerParkingRealTime.ICON_NAME, new Stage(), ViewType.SLAVE_UNIQUE);
                 close(event);
             }
         } catch (InvalidUser e) {
@@ -64,6 +66,7 @@ public class ControllerViewUser extends RealTimeUpdateView<ControllerParking> im
             e.printStackTrace();
         }
     }
+
     @Override
     public void onUpdate() {
 

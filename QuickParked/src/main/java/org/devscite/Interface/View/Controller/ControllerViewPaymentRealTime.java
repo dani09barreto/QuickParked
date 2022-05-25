@@ -14,7 +14,7 @@ import org.devscite.Utils.Exeptions.VehicleNotExist;
 
 import java.text.SimpleDateFormat;
 
-public class ControllerViewPayment extends RealTimeUpdateView<ControllerParking> {
+public class ControllerViewPaymentRealTime extends RealTimeObservableView {
 
     public final static String MAIN_FXML_NAME = "../filesFXML/PaymentScene.fxml";
     public final static String WINDOW_NAME = "Pago de vehículos";
@@ -84,7 +84,7 @@ public class ControllerViewPayment extends RealTimeUpdateView<ControllerParking>
     void payService(ActionEvent event) {
         // Get values from Screen
         String licensePlate = textLicensePlate.getText();
-        Vehicle vehicle = manager.getController().getControllerVehicle().getVehicle(licensePlate.toUpperCase());
+        Vehicle vehicle = ControllerParking.getInstance().getControllerVehicle().getVehicle(licensePlate.toUpperCase());
         int value;
 
         try {
@@ -98,7 +98,7 @@ public class ControllerViewPayment extends RealTimeUpdateView<ControllerParking>
                 throw new ValueNotValid("Valor no es valido");
             }
 
-            if (manager.getController().getControllerVehicle().generatePayment(vehicle.getLicensePlate()) == null)
+            if (ControllerParking.getInstance().getControllerVehicle().generatePayment(vehicle.getLicensePlate()) == null)
                 throw new VehicleNotExist("Error intero, el vehículo no existe");
 
             notifyUpdate();
@@ -126,7 +126,7 @@ public class ControllerViewPayment extends RealTimeUpdateView<ControllerParking>
         String licensePlate = textLicensePlate.getText().toUpperCase();
 
         try {
-            Vehicle vehicle = manager.getController().getControllerVehicle().getVehicle(licensePlate);
+            Vehicle vehicle = ControllerParking.getInstance().getControllerVehicle().getVehicle(licensePlate);
             if (vehicle == null) throw new VehicleNotExist("No existe el vehículo");
 
             fillFields(vehicle);
