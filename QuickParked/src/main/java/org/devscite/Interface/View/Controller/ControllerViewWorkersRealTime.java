@@ -5,9 +5,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import org.devscite.Entities.Model.Employee;
 import org.devscite.Entities.Model.UserParking;
+import org.devscite.structure.Controller.ControllerParking;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
@@ -24,9 +27,6 @@ public class ControllerViewWorkersRealTime extends RealTimeObservableView implem
 
     @FXML
     private TableColumn<UserParking, Integer> documentColum;
-
-    @FXML
-    private TableColumn<UserParking, UUID> idColum;
 
     @FXML
     private TableColumn<UserParking, String> nameColum;
@@ -51,6 +51,6 @@ public class ControllerViewWorkersRealTime extends RealTimeObservableView implem
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        workersTable.getItems().addAll(ControllerParking.getInstance().getControllerUser().getiUserDAO().listWorkers());
     }
 }

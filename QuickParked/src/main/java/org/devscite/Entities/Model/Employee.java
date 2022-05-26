@@ -48,4 +48,9 @@ public class Employee extends UserParking {
     public void setNumber(BigDecimal number) {
         this.number = number;
     }
+
+    @Override
+    public String toString() {
+        return "Employee{}";
+    }
 }

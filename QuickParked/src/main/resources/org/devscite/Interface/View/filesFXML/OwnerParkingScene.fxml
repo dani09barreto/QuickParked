@@ -130,7 +130,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField layoutX="664.0" layoutY="195.0" styleClass="search-bar" />
+            <TextField fx:id="userNameLabel" layoutX="664.0" layoutY="195.0" styleClass="search-bar" />
             <Label layoutX="664.0" layoutY="171.0" text="Nombre Usuario">
                <font>
                   <Font size="14.0" />
