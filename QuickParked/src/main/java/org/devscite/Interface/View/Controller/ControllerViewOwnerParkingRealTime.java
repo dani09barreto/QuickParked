@@ -142,6 +142,7 @@ public class ControllerViewOwnerParkingRealTime extends RealTimeObservableView i
             AlertUtils.alertConfirmation("Trabajador Agregado", "El emleado se ha agregado correctamente", "");
             clearWorker();
         } catch (Exception e) {
+            AlertUtils.alertError("Error", "No se logro agregar el empleado", "intentelo de nuevo");
             e.printStackTrace();
         }
     }
