@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="538.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devscite.Interface.View.Controller.ControllerViewWorkersRealTime">
    <top>
       <AnchorPane prefHeight="48.0" prefWidth="538.0" style="-fx-background-color: #1190CB;" BorderPane.alignment="CENTER">
@@ -44,24 +43,19 @@
                <children>
                   <TableView fx:id="workersTable" editable="true" nodeOrientation="LEFT_TO_RIGHT" prefHeight="339.0" prefWidth="699.0">
                      <columns>
-                        <TableColumn fx:id="idColum" prefWidth="102.0" text="ID">
-                           <cellValueFactory>
-                              <PropertyValueFactory property="TypeVehicle" />
-                           </cellValueFactory>
-                        </TableColumn>
                         <TableColumn fx:id="nameColum" prefWidth="128.0" text="Nombre">
                            <cellValueFactory>
-                              <PropertyValueFactory property="Model" />
+                              <javafx.scene.control.cell.PropertyValueFactory property="Name" />
                            </cellValueFactory>
                         </TableColumn>
                         <TableColumn fx:id="documentColum" prefWidth="114.0" text="Cedula">
                            <cellValueFactory>
-                              <PropertyValueFactory property="LicensePlate" />
+                              <javafx.scene.control.cell.PropertyValueFactory property="Document" />
                            </cellValueFactory>
                         </TableColumn>
                         <TableColumn fx:id="celColum" prefWidth="100.0" text="Celudar">
                            <cellValueFactory>
-                              <PropertyValueFactory property="CheckinFormatted" />
+                              <javafx.scene.control.cell.PropertyValueFactory property="Number" />
                            </cellValueFactory>
                         </TableColumn>
                      </columns>

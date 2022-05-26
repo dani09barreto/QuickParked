@@ -24,4 +24,12 @@ public abstract class UserParking {
     public void setPassWord(String passWord) {
         this.passWord = passWord;
     }
+
+    @Override
+    public String toString() {
+        return "UserParking{" +
+                "username='" + username + '\'' +
+                ", passWord='" + passWord + '\'' +
+                '}';
+    }
 }

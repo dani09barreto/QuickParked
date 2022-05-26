@@ -6,10 +6,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import org.devscite.Aplication.aggregates.InformationDAOImpl;
 import org.devscite.Entities.Enums.SlotType;
+import org.devscite.Entities.Model.Employee;
 import org.devscite.Utils.AlertUtils;
+import org.devscite.Utils.ViewType;
+import org.devscite.structure.Controller.ControllerParking;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -21,12 +26,12 @@ public class ControllerViewOwnerParkingRealTime extends RealTimeObservableView i
     public final static String MAIN_FXML_NAME = "../filesFXML/OwnerParkingScene.fxml";
     public final static String WINDOW_NAME = "Información Parqueadero";
     public final static String ICON_NAME = "../img/logo_mini.png";
-
     private Map<SlotType, Integer> slots = new HashMap<>();
     private Integer carFee;
     private Integer motorcycleFee;
     private String parkingName;
     private String parkingAddress;
+    public TextField userNameLabel;
 
     private final InformationDAOImpl database = new InformationDAOImpl();
 
@@ -126,12 +131,29 @@ public class ControllerViewOwnerParkingRealTime extends RealTimeObservableView i
 
     @FXML
     void addWorker(ActionEvent event) {
-
+        try {
+            String name = nameWorkerLabel.getText();
+            BigDecimal document = BigDecimal.valueOf(Long.parseLong(documentWorkerLabel.getText()));
+            BigDecimal number = BigDecimal.valueOf(Long.parseLong(celWorkerLabel.getText()));
+            String userN = userNameLabel.getText();
+            String pass = passWorkerLabel.getText();
+            Employee newEmp = new Employee(userN, pass, name, document, number);
+            ControllerParking.getInstance().getControllerUser().getiUserDAO().addEmployee(newEmp);
+            AlertUtils.alertConfirmation("Trabajador Agregado", "El emleado se ha agregado correctamente", "");
+            clearWorker();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    void listWorkers(ActionEvent event) {
-
+    void listWorkers(ActionEvent event) throws Exception {
+        this.observer.createView(
+                ControllerViewWorkersRealTime.MAIN_FXML_NAME,
+                ControllerViewWorkersRealTime.WINDOW_NAME,
+                ControllerViewWorkersRealTime.ICON_NAME,
+                new Stage(), ViewType.SLAVE_UNIQUE
+        );
     }
 
     @Override
@@ -187,6 +209,14 @@ public class ControllerViewOwnerParkingRealTime extends RealTimeObservableView i
             AlertUtils.alertError("Error", "Ha ocurrido un error en el sistema", e.getMessage());
             close(new ActionEvent());
         }
+    }
+
+    public void clearWorker (){
+        userNameLabel.setText("");
+        passWorkerLabel.setText("");
+        nameWorkerLabel.setText("");
+        celWorkerLabel.setText("");
+        documentWorkerLabel.setText("");
     }
 }
 

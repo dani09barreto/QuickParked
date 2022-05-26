@@ -13,8 +13,66 @@ import java.util.ArrayList;
 public class UserDAOImpl implements IUserDAO{
 
     @Override
-    public void addUser(UserParking userParking) {
+    public void addEmployee(Employee employee) {
+        Integer id = addUser(employee);
+        System.out.println(id);
+        String sql = "INSERT INTO EMPLOYEE (USERID,DOCUMENT,NAME,CELLPHONE) VALUES(?,?,?,?)";
+        try (Connection conex = DriverManager.getConnection(
+                Constants.THINCONN,
+                Constants.USERNAME,
+                Constants.PASSWORD);
+             PreparedStatement ps = conex.prepareStatement(sql);){
 
+            ps.setInt(1, id);
+            ps.setBigDecimal(2, employee.getDocument());
+            ps.setString(3, employee.getName());
+            ps.setBigDecimal(4, employee.getNumber());
+            ps.executeUpdate();
+            System.out.println("ejecutada");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public Integer addUser(Employee employee) {
+        Integer id = 0;
+        String SQL = "INSERT INTO USERPARKING(USERNAME,PASSWORD) VALUES(?,?)";
+        try (Connection conex = DriverManager.getConnection(Constants.THINCONN,
+                Constants.USERNAME,
+                Constants.PASSWORD);
+             PreparedStatement ps = conex.prepareStatement(SQL);
+        ) {
+            ps.setString(1, employee.getUsername());
+            ps.setString(2, employee.getPassWord());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        StringBuilder ConsultS = new StringBuilder("SELECT ID from USERPARKING\n" +
+                "WHERE USERNAME = ? AND\n" +
+                "      PASSWORD = ?");
+        try (
+                Connection conex = DriverManager.getConnection(
+                        Constants.THINCONN,
+                        Constants.USERNAME,
+                        Constants.PASSWORD);
+                PreparedStatement ps = conex.prepareStatement(ConsultS.toString());
+        ) {
+            //se asignan los valores a los parametros
+            ps.setString(1, employee.getUsername());
+            ps.setString(2, employee.getPassWord());
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    id = rs.getInt("ID");
+                }
+            }
+            return id;
+        } catch (SQLException ex) {
+            System.out.println("Error de conexion:" + ex.toString());
+            ex.printStackTrace();
+        }
+        return null;
     }
 
     @Override
@@ -28,8 +86,26 @@ public class UserDAOImpl implements IUserDAO{
     }
 
     @Override
-    public ArrayList<UserParking> listUsers() {
-        return null;
+    public ArrayList<Employee> listWorkers() {
+        ArrayList<Employee> workers = new ArrayList<>();
+        StringBuilder SQL =
+                new StringBuilder("select u.USERNAME, u.PASSWORD, e.NAME, e.DOCUMENT, e.CELLPHONE\n" +
+                        "from EMPLOYEE e, USERPARKING u\n" +
+                        "where u.ID = e.USERID and USERNAME != 'Admin'  ");
+        try (
+                Connection conex = DriverManager.getConnection(Constants.THINCONN, Constants.USERNAME, Constants.PASSWORD);
+                PreparedStatement ps = conex.prepareStatement(SQL.toString());) {
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    workers.add(buildEmployee(rs));
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return workers;
     }
 
     @Override
@@ -77,5 +153,15 @@ public class UserDAOImpl implements IUserDAO{
             );
         }
         return us;
+    }
+
+    public Employee buildEmployee (ResultSet rs) throws SQLException {
+        return new Employee(
+                rs.getString("USERNAME"),
+                rs.getString("PASSWORD"),
+                rs.getString("NAME"),
+                rs.getBigDecimal("DOCUMENT"),
+                rs.getBigDecimal("CELLPHONE")
+        );
     }
 }
