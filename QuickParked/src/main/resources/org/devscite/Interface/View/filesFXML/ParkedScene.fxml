@@ -28,7 +28,7 @@
                     </ImageView>
                 </graphic>
             </Button>
-            <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="36.0" style="-fx-background-color: #FFFFFFFF; -fx-background-radius: 10;">
+            <Button fx:id="infoWorkerbtn" layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#showInfoWorker" prefHeight="25.0" prefWidth="36.0" style="-fx-background-color: #FFFFFFFF; -fx-background-radius: 10;">
                 <graphic>
                     <ImageView fitHeight="19.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                         <Image url="@../img/user.png" />

@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="446.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devscite.Interface.View.Controller.ControllerViewInfoWorkerRealTime">
    <top>
       <AnchorPane prefHeight="48.0" prefWidth="538.0" style="-fx-background-color: #1190CB;" BorderPane.alignment="CENTER">
@@ -81,7 +80,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="timeSesionLabel" layoutX="38.0" layoutY="323.0" prefHeight="25.0" prefWidth="144.0">
+            <Label fx:id="timeSesionLabel" layoutX="38.0" layoutY="323.0" prefHeight="26.0" prefWidth="214.0">
                <font>
                   <Font size="16.0" />
                </font>

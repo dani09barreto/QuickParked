@@ -47,6 +47,7 @@ public class ControllerViewUserRealTime extends RealTimeObservableView implement
         try {
             userlogIn = ControllerParking.getInstance().getControllerUser().getiUserDAO().searchUser(username, password);
             if (userlogIn instanceof Employee) {
+                ControllerParking.getInstance().loginUser((Employee) userlogIn);
                 this.observer.createView(
                         ControllerViewParkingRealTime.MAIN_FXML_NAME,
                         ControllerViewParkingRealTime.WINDOW_NAME,

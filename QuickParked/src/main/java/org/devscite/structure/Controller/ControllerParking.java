@@ -1,7 +1,13 @@
 package org.devscite.structure.Controller;
 
-public class ControllerParking {
+import org.devscite.Entities.Model.Employee;
+import org.devscite.Entities.Model.UserParking;
 
+import java.util.Calendar;
+
+public class ControllerParking {
+    private Employee actualUser;
+    private Calendar timeSesion;
     // Slots de parqueadero TODO: Que el usuario pueda cambiarlo
     static final Integer max_parking_slots = 60;
 
@@ -41,5 +47,19 @@ public class ControllerParking {
         }
 
         return instance;
+    }
+
+    public Employee getActualUser() {
+        return actualUser;
+    }
+
+    public void loginUser(Employee use){
+        this.actualUser = use;
+        this.timeSesion = Calendar.getInstance();
+
+    }
+
+    public Calendar getTimeSesion() {
+        return timeSesion;
     }
 }

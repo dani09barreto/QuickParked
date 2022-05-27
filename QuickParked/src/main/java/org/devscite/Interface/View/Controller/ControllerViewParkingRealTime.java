@@ -30,6 +30,8 @@ public class ControllerViewParkingRealTime extends RealTimeObservableView implem
 
     @FXML
     public Button addVehicleBtn;
+    @FXML
+    private Button infoWorkerbtn;
 
     @FXML
     private Button btnLogOut;
@@ -155,6 +157,18 @@ public class ControllerViewParkingRealTime extends RealTimeObservableView implem
         } else if (selectedMotorcycle.isSelected()) {
             vehicleTypesMotorcycle();
         }
+    }
+
+
+    @FXML
+    void showInfoWorker(ActionEvent event) throws Exception {
+        this.observer.createView(
+
+                ControllerViewInfoWorkerRealTime.MAIN_FXML_NAME,
+                ControllerViewInfoWorkerRealTime.WINDOW_NAME,
+                ControllerViewInfoWorkerRealTime.ICON_NAME,
+                new Stage(), ViewType.SLAVE_UNIQUE
+        );
     }
 
     public void updateVehicleList() {
