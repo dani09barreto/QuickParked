@@ -23,9 +23,9 @@ import java.util.ResourceBundle;
 
 public class ControllerViewOwnerParkingRealTime extends RealTimeObservableView implements Initializable {
 
-    public final static String MAIN_FXML_NAME = "../filesFXML/OwnerParkingScene.fxml";
+    public final static String MAIN_FXML_NAME = "filesFXML/OwnerParkingScene.fxml";
     public final static String WINDOW_NAME = "Información Parqueadero";
-    public final static String ICON_NAME = "../img/logo_mini.png";
+    public final static String ICON_NAME = "img/logo_mini.png";
     private Map<SlotType, Integer> slots = new HashMap<>();
     private Integer carFee;
     private Integer motorcycleFee;

@@ -24,9 +24,9 @@ import java.util.stream.Stream;
 
 public class ControllerViewParkingRealTime extends RealTimeObservableView implements Initializable {
 
-    public final static String MAIN_FXML_NAME = "../filesFXML/ParkedScene.fxml";
+    public final static String MAIN_FXML_NAME = "filesFXML/ParkedScene.fxml";
     public final static String WINDOW_NAME = "QuickParked";
-    public final static String ICON_NAME = "../img/logo_mini.png";
+    public final static String ICON_NAME = "img/logo_mini.png";
 
     @FXML
     public Button addVehicleBtn;

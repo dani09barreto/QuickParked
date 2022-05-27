@@ -15,9 +15,9 @@ import java.util.ResourceBundle;
 import java.util.UUID;
 
 public class ControllerViewWorkersRealTime extends RealTimeObservableView implements Initializable {
-    public final static String MAIN_FXML_NAME = "../filesFXML/listWorkersScene.fxml";
+    public final static String MAIN_FXML_NAME = "filesFXML/listWorkersScene.fxml";
     public final static String WINDOW_NAME = "Lista de Trabajadores";
-    public final static String ICON_NAME = "../img/logo_mini.png";
+    public final static String ICON_NAME = "img/logo_mini.png";
 
     @FXML
     private Button backBtn;

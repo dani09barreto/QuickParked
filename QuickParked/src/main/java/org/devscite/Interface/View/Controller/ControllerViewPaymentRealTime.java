@@ -16,9 +16,9 @@ import java.text.SimpleDateFormat;
 
 public class ControllerViewPaymentRealTime extends RealTimeObservableView {
 
-    public final static String MAIN_FXML_NAME = "../filesFXML/PaymentScene.fxml";
+    public final static String MAIN_FXML_NAME = "filesFXML/PaymentScene.fxml";
     public final static String WINDOW_NAME = "Pago de vehículos";
-    public final static String ICON_NAME = "../img/logo_mini.png";
+    public final static String ICON_NAME = "img/logo_mini.png";
 
     @FXML
     private Button backBtn;

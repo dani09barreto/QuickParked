@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.devscite.Interface.View.App;
 import org.devscite.Utils.Exeptions.ViewException;
 import org.devscite.Utils.ViewType;
 
@@ -74,21 +75,21 @@ public class ViewManagementObserver {
      * @throws Exception FXML exception or ViewException
      */
     public void createView(String fxml, String title, String icon, Stage stage, ViewType type) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource(fxml));
         Parent root = loader.load();
 
         RealTimeObservableView viewController = Objects.requireNonNull(loader.getController());
         viewController.subscribe(this, type);
 
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("../styles.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(App.class.getResource("styles.css")).toExternalForm());
 
         stage.setOnCloseRequest(windowEvent -> {
             unsuscribe(viewController);
             viewController.onExit();
         });
 
-        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream(icon))));
+        stage.getIcons().add(new Image(Objects.requireNonNull(App.class.getResourceAsStream(icon))));
         stage.setTitle(title);
         stage.setMaximized(false);
         stage.setResizable(false);

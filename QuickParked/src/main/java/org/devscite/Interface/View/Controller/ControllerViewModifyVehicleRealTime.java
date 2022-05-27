@@ -19,9 +19,9 @@ import java.util.ResourceBundle;
 
 public class ControllerViewModifyVehicleRealTime extends RealTimeObservableView implements Initializable {
 
-    public final static String MAIN_FXML_NAME = "../filesFXML/ModifyScene.fxml";
+    public final static String MAIN_FXML_NAME = "filesFXML/ModifyScene.fxml";
     public final static String WINDOW_NAME = "Modificar vehículo";
-    public final static String ICON_NAME = "../img/logo_mini.png";
+    public final static String ICON_NAME = "img/logo_mini.png";
 
     @FXML
     public Button backBtn;

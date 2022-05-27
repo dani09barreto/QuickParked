@@ -17,9 +17,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ControllerViewUserRealTime extends RealTimeObservableView implements Initializable {
-    public final static String MAIN_FXML_NAME = "../filesFXML/SceneLogin.fxml";
+    public final static String MAIN_FXML_NAME = "filesFXML/SceneLogin.fxml";
     public final static String WINDOW_NAME = "QuickParked";
-    public final static String ICON_NAME = "../img/logo_mini.png";
+    public final static String ICON_NAME = "img/logo_mini.png";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -61,7 +61,7 @@ public class ControllerViewUserRealTime extends RealTimeObservableView implement
                 close(event);
             }
         } catch (InvalidUser e) {
-            AlertUtils.alertError("Error", "No se pudo iniciar sesión contraseña o usuarios invalidos", "");
+            AlertUtils.alertError("Error", "No se pudo iniciar sesión contraseña o usuarios invalidos", "(1.3-DEV) - (Requiere VPN) Verifica que estés conectado a la red de la Universidad Javeriana");
             resetLabels();
         } catch (Exception e) {
             e.printStackTrace();
