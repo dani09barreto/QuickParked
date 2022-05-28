@@ -7,7 +7,7 @@ public class Parking {
     private String name;
     private String ubication;
     private Calendar schedule;
-    private ArrayList<Space> spaces = new ArrayList<>();
+    private ArrayList<Slot> slots = new ArrayList<>();
     private Integer rateCar;
     private Integer rateCycle;
 
@@ -35,12 +35,12 @@ public class Parking {
         this.schedule = schedule;
     }
 
-    public ArrayList<Space> getSpaces() {
-        return spaces;
+    public ArrayList<Slot> getSpaces() {
+        return slots;
     }
 
-    public void setSpaces(ArrayList<Space> spaces) {
-        this.spaces = spaces;
+    public void setSpaces(ArrayList<Slot> slots) {
+        this.slots = slots;
     }
 
     public Integer getRateCar() {
