@@ -76,6 +76,9 @@ public class ControllerViewParkingRealTime extends RealTimeObservableView implem
     public TableColumn<Vehicle, Integer> place;
 
     @FXML
+    private Label nameWorker;
+
+    @FXML
     void addVehicle(ActionEvent event) {
         Vehicle new_vehicle;
         // Crear el vehículo
@@ -211,6 +214,7 @@ public class ControllerViewParkingRealTime extends RealTimeObservableView implem
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Vehicle type init
         vehicleTypesDefault();
+        nameWorker.setText(ControllerParking.getInstance().getActualUser().getName());
     }
 
     @Override

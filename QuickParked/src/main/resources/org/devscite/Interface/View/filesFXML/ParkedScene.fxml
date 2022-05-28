@@ -35,7 +35,7 @@
                     </ImageView>
                 </graphic>
             </Button>
-            <Label layoutX="64.0" layoutY="13.0" text="Daniel Felipe Barreto" textFill="WHITE">
+            <Label fx:id="nameWorker" layoutX="64.0" layoutY="13.0" prefHeight="21.0" prefWidth="183.0" textFill="WHITE">
                 <font>
                     <Font size="15.0" />
                 </font>
