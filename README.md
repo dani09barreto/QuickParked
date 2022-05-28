@@ -1,9 +1,12 @@
 # QuickParked
 Guia de uso para la aplicacion QuickParked
+
 Bienvenido señor/a Trabajador este es una guia en donde describiremos el paso a paso de la aplicacion.
 para poder acceder a la base de datos tienen que tener la VPN de la Universidad Javerina si no la tiene por favor 
 descargarla en el siguiente link y registrarse con su correo institucional (@javeriana.edu.co).
-Link de descarga de la VPN de la Pontificia Universidad javeriana: https://arpuj.javeriana.edu.co/.
+Link de descarga de la VPN de la Pontificia Universidad javeriana: https://arpuj.javeriana.edu.co/. Es necesario tener
+una version de java mayor 11 o igual para poder ejecutar el .jar
+
 USUARIO ADMINISTRADOR
 
 # 1.Inicio de sesion - Administradores
