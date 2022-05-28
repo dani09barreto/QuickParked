@@ -1,7 +1,5 @@
 package org.devscite.structure.Controller;
 
-import org.devscite.Aplication.aggregates.VehicleDAOImp;
-import org.devscite.Aplication.persistence.IVehicleDAO;
 import org.devscite.Entities.Model.Vehicle;
 import org.devscite.Utils.Exeptions.ParkingFull;
 import org.devscite.Utils.Exeptions.VehicleNotExist;
@@ -11,7 +9,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class ControllerVehicle {
-    private IVehicleDAO iVehicleDAO = new VehicleDAOImp();
     /* ---  Private attributes --- */
 
     /**
@@ -56,14 +53,6 @@ public class ControllerVehicle {
             return vehiclelist.get(licensePlate.toUpperCase());
         }
         return null;
-    }
-
-    public IVehicleDAO getiVehicleDAO() {
-        return iVehicleDAO;
-    }
-
-    public void setiVehicleDAO(IVehicleDAO iVehicleDAO) {
-        this.iVehicleDAO = iVehicleDAO;
     }
 
     /**
