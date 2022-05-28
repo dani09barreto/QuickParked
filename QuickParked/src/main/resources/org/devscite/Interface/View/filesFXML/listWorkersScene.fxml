@@ -53,7 +53,7 @@
                               <javafx.scene.control.cell.PropertyValueFactory property="Document" />
                            </cellValueFactory>
                         </TableColumn>
-                        <TableColumn fx:id="celColum" prefWidth="100.0" text="Celudar">
+                        <TableColumn fx:id="celColum" prefWidth="100.0" text="Celular">
                            <cellValueFactory>
                               <javafx.scene.control.cell.PropertyValueFactory property="Number" />
                            </cellValueFactory>
