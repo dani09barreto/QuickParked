@@ -79,7 +79,6 @@ public class ControllerVehicle {
         while (assignedSlots.contains(slot)) {
             slot = randomizer.nextInt(ControllerParking.max_parking_slots + 1);
         }
-
         return slot;
     }
 
@@ -106,6 +105,7 @@ public class ControllerVehicle {
         }
         vehicle.setCheckout(Calendar.getInstance());
         vehicle.calculatePrice();
+
 
         // Update lists
         vehiclelist.remove(licenseplate.toUpperCase());
