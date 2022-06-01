@@ -71,6 +71,6 @@ public class AppTest {
 
     @Test
     public void SearchUser(){
-
+        System.out.println("hola");
     }
 }
