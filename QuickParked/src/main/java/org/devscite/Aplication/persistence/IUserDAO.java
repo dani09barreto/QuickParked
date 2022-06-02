@@ -8,9 +8,16 @@ import java.util.ArrayList;
 
 public interface IUserDAO {
     Integer addUser(Employee employee);
+
     void addEmployee(Employee employee);
+
     void updateUser(UserParking userParking);
-    void deleteUser(UserParking userParking);
-    ArrayList<Employee> listWorkers ();
+
+    void deleteEmployee(Employee employee);
+
+    void deleteUser(Employee employee);
+
+    ArrayList<Employee> listWorkers();
+
     UserParking searchUser(String username, String passWord) throws InvalidUser;
 }
