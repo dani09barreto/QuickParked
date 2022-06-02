@@ -95,7 +95,7 @@ public abstract class Vehicle {
      * Checks if a plate is valid, should be overriden by Vehicles types
      *
      * @param licensePlate LicensePlate to check
-     * @return True if valid
+     * @return True if not valid
      */
     public abstract boolean invalidPlate(String licensePlate);
 }
