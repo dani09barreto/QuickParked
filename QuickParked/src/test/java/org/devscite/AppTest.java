@@ -1,10 +1,7 @@
 package org.devscite;
 
 import org.devscite.Entities.Enums.CarModel;
-import org.devscite.Entities.Model.Car;
-import org.devscite.Entities.Model.Employee;
-import org.devscite.Entities.Model.UserParking;
-import org.devscite.Entities.Model.Vehicle;
+import org.devscite.Entities.Model.*;
 import org.devscite.Utils.Exeptions.InvalidLicensePlate;
 import org.devscite.Utils.Exeptions.ParkingFull;
 import org.devscite.Utils.Exeptions.VehicleNotExist;
@@ -29,7 +26,7 @@ public class AppTest {
     }
 
     @Test
-    public void VehicleList() {
+    public void vehicleList() {
         try {
             Vehicle temp = new Car("AAA123", Calendar.getInstance(), CarModel.Automovil);
             ControllerParking.getInstance().getControllerVehicle().addVehicle(temp);
@@ -42,28 +39,70 @@ public class AppTest {
     }
 
     @Test
-    public void slot() {
+    public void slotAssigment() {
         try {
-            Vehicle temp = new Car("AAA123", Calendar.getInstance(), CarModel.Automovil);
             assertTrue(0 < ControllerParking.getInstance().getControllerVehicle().parkingSlotAssignment());
-        } catch (InvalidLicensePlate | ParkingFull e) {
-            throw new RuntimeException(e);
+        } catch (ParkingFull e) {
+            e.printStackTrace();
         }
     }
 
     @Test
-    public void SearchEmployee() {
+    public void searchVehicle() {
         try {
-            UserParking temp = new Employee("Santiago_29@", "Santi263", "Daniel Barreto", BigDecimal.valueOf(10031626), BigDecimal.valueOf(311851313));
-            ControllerParking.getInstance().getControllerUser().getiUserDAO().addEmployee((Employee) temp);
-            assertEquals(temp, ControllerParking.getInstance().getControllerUser().getiUserDAO().searchUser("Santiago_29@", "Santi263"));
+            Vehicle testingVehicle = new Car("ABC123", Calendar.getInstance(), CarModel.Automovil);
+            ControllerParking.getInstance().getControllerVehicle().addVehicle(testingVehicle);
+            Vehicle expected = ControllerParking.getInstance().getControllerVehicle().getVehicle("ABC123");
+            // Hay que borrar para que luego el test de cantidad de vehículos no falle
+            ControllerParking.getInstance().getControllerVehicle().generatePayment("ABC123");
+
+            assertEquals(testingVehicle, expected);
+
+        } catch (ParkingFull | InvalidLicensePlate | VehicleNotExist e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void searchEmployee() {
+        try {
+            Employee temp = new Employee("test_user", "test123", "TEST USER", BigDecimal.valueOf(1234567890), BigDecimal.valueOf(987654321));
+            ControllerParking.getInstance().getControllerUser().getiUserDAO().addUser(temp);
+            ControllerParking.getInstance().getControllerUser().getiUserDAO().addEmployee(temp);
+            Employee user = (Employee) ControllerParking.getInstance().getControllerUser().getiUserDAO().searchUser("test_user", "test123");
+            ControllerParking.getInstance().getControllerUser().getiUserDAO().deleteEmployee(temp);
+            ControllerParking.getInstance().getControllerUser().getiUserDAO().deleteUser(temp);
+
+            // Verificar que sean iguales excepto el ID que es aleatorio
+            assertEquals(temp.getDocument(), user.getDocument());
+            assertEquals(temp.getName(), user.getName());
+            assertEquals(temp.getNumber(), user.getNumber());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void SearchUser() {
-        System.out.println("hola");
+    public void searchUser() {
+        try {
+            Employee temp = new Employee("test_user", "test123", "TEST USER", BigDecimal.valueOf(1234567890), BigDecimal.valueOf(987654321));
+            ControllerParking.getInstance().getControllerUser().getiUserDAO().addUser(temp);
+            UserParking user = (Employee) ControllerParking.getInstance().getControllerUser().getiUserDAO().searchUser("test_user", "test123");
+            ControllerParking.getInstance().getControllerUser().getiUserDAO().deleteUser(temp);
+
+            // Verificar que sus propiedades son iguales
+            assertEquals(((UserParking) temp).getUsername(), user.getUsername());
+            assertEquals(((UserParking) temp).getPassWord(), user.getPassWord());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test(expected = InvalidLicensePlate.class)
+    public void invalidLicensePlate() throws InvalidLicensePlate {
+        new Car("123ABC", Calendar.getInstance(), CarModel.Automovil);
+        new MotorCycle("A1B2C3", Calendar.getInstance());
     }
 }
