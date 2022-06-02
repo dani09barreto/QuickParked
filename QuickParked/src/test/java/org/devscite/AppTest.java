@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 
 public class AppTest {
     @Test
-    public void InsertionCar() {
+    public void insertionCar() {
         try {
             Vehicle temp = new Car("AAA123", Calendar.getInstance(), CarModel.Automovil);
             ControllerParking.getInstance().getControllerVehicle().addVehicle(temp);
@@ -66,10 +66,12 @@ public class AppTest {
     @Test
     public void searchEmployee() {
         try {
-            Employee temp = new Employee("test_user", "test123", "TEST USER", BigDecimal.valueOf(1234567890), BigDecimal.valueOf(987654321));
+            Employee temp = new Employee("test_user", "test123", "TEST USER",
+                    BigDecimal.valueOf(1234567890), BigDecimal.valueOf(987654321));
             ControllerParking.getInstance().getControllerUser().getiUserDAO().addUser(temp);
             ControllerParking.getInstance().getControllerUser().getiUserDAO().addEmployee(temp);
-            Employee user = (Employee) ControllerParking.getInstance().getControllerUser().getiUserDAO().searchUser("test_user", "test123");
+            Employee user = (Employee) ControllerParking.getInstance().getControllerUser().getiUserDAO()
+                                               .searchUser("test_user", "test123");
             ControllerParking.getInstance().getControllerUser().getiUserDAO().deleteEmployee(temp);
             ControllerParking.getInstance().getControllerUser().getiUserDAO().deleteUser(temp);
 
@@ -86,14 +88,16 @@ public class AppTest {
     @Test
     public void searchUser() {
         try {
-            Employee temp = new Employee("test_user", "test123", "TEST USER", BigDecimal.valueOf(1234567890), BigDecimal.valueOf(987654321));
+            Employee temp = new Employee("test_user", "test123", "TEST USER",
+                    BigDecimal.valueOf(1234567890), BigDecimal.valueOf(987654321));
             ControllerParking.getInstance().getControllerUser().getiUserDAO().addUser(temp);
-            UserParking user = (Employee) ControllerParking.getInstance().getControllerUser().getiUserDAO().searchUser("test_user", "test123");
+            UserParking user = ControllerParking.getInstance().getControllerUser().getiUserDAO()
+                                       .searchUser("test_user", "test123");
             ControllerParking.getInstance().getControllerUser().getiUserDAO().deleteUser(temp);
 
             // Verificar que sus propiedades son iguales
-            assertEquals(((UserParking) temp).getUsername(), user.getUsername());
-            assertEquals(((UserParking) temp).getPassWord(), user.getPassWord());
+            assertEquals(temp.getUsername(), user.getUsername());
+            assertEquals(temp.getPassWord(), user.getPassWord());
 
         } catch (Exception e) {
             e.printStackTrace();
