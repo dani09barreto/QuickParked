@@ -7,8 +7,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import org.devscite.Entities.Model.Employee;
 import org.devscite.Entities.Model.UserParking;
+import org.devscite.Utils.AlertUtils;
 import org.devscite.structure.Controller.ControllerParking;
 
+import java.awt.event.ActionEvent;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -21,7 +23,8 @@ public class ControllerViewWorkersRealTime extends RealTimeObservableView implem
 
     @FXML
     private Button backBtn;
-
+    @FXML
+    private Button deleteBtn;
     @FXML
     private TableColumn<UserParking, Integer> celColum;
 
@@ -52,5 +55,27 @@ public class ControllerViewWorkersRealTime extends RealTimeObservableView implem
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         workersTable.getItems().addAll(ControllerParking.getInstance().getControllerUser().getiUserDAO().listWorkers());
+    }
+
+    public void renderTable() {
+        ClearTable();
+        workersTable.getItems().addAll(ControllerParking.getInstance().getControllerUser().getiUserDAO().listWorkers());
+    }
+
+    public void ClearTable() {
+        workersTable.getItems().clear();
+    }
+
+    @FXML
+    public void deleteWorker(javafx.event.ActionEvent actionEvent) {
+        try {
+            Employee delete = (Employee) workersTable.getSelectionModel().getSelectedItem();
+            System.out.println(delete.getName());
+            ControllerParking.getInstance().getControllerUser().getiUserDAO().deleteEmployee(delete);
+            renderTable();
+        } catch (Exception e) {
+            AlertUtils.alertError("ERROR", "El usuario no pudo ser eliminado", "Recuerde selecionar un usuario en la tabla");
+            e.printStackTrace();
+        }
     }
 }

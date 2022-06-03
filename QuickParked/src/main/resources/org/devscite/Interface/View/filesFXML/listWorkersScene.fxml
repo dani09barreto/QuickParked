@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="538.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devscite.Interface.View.Controller.ControllerViewWorkersRealTime">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="514.0" prefWidth="538.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devscite.Interface.View.Controller.ControllerViewWorkersRealTime">
    <top>
       <AnchorPane prefHeight="48.0" prefWidth="538.0" style="-fx-background-color: #1190CB;" BorderPane.alignment="CENTER">
          <children>
@@ -65,6 +65,11 @@
                   </TableView>
                </children>
             </StackPane>
+            <Button fx:id="deleteBtn" layoutX="427.0" layoutY="411.0" mnemonicParsing="false" onAction="#deleteWorker" prefHeight="31.0" prefWidth="75.0" style="-fx-background-color: #1190CB; -fx-background-radius: 100;" text="Eliminar" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </center>

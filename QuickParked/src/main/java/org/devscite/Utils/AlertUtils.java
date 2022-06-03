@@ -14,8 +14,12 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Optional;
 
+/**
+ * easy way of calling JavaFX alerts and pop-ups
+ */
 public class AlertUtils {
-    public static void alertInformation(String titulo, String header, String mensaje){
+    
+    public static void alertInformation(String titulo, String header, String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(titulo);
         alert.setHeaderText(header);
@@ -23,7 +27,7 @@ public class AlertUtils {
         alert.showAndWait();
     }
 
-    public static void alertMiniInformation(String titulo, String mensaje){
+    public static void alertMiniInformation(String titulo, String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(titulo);
         alert.setHeaderText(null);
@@ -31,7 +35,7 @@ public class AlertUtils {
         alert.showAndWait();
     }
 
-    public static void alertWarning(String titulo, String header, String mensaje){
+    public static void alertWarning(String titulo, String header, String mensaje) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle(titulo);
         alert.setHeaderText(header);
@@ -39,7 +43,7 @@ public class AlertUtils {
         alert.showAndWait();
     }
 
-    public static void alertMiniWarning(String titulo, String mensaje){
+    public static void alertMiniWarning(String titulo, String mensaje) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle(titulo);
         alert.setHeaderText(null);
@@ -47,7 +51,7 @@ public class AlertUtils {
         alert.showAndWait();
     }
 
-    public static void alertError(String titulo, String header, String mensaje){
+    public static void alertError(String titulo, String header, String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(titulo);
         alert.setHeaderText(header);
@@ -55,7 +59,7 @@ public class AlertUtils {
         alert.showAndWait();
     }
 
-    public static void alertMiniError(String titulo, String mensaje){
+    public static void alertMiniError(String titulo, String mensaje) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle(titulo);
         alert.setHeaderText(null);
@@ -63,7 +67,7 @@ public class AlertUtils {
         alert.showAndWait();
     }
 
-    public static void alertException(String titulo, String header, String mensaje, Exception ex){
+    public static void alertException(String titulo, String header, String mensaje, Exception ex) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(titulo);
         alert.setHeaderText(header);
@@ -90,7 +94,7 @@ public class AlertUtils {
         alert.showAndWait();
     }
 
-    public static Optional<ButtonType> alertConfirmation(String titulo, String header, String mensaje){
+    public static Optional<ButtonType> alertConfirmation(String titulo, String header, String mensaje) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(titulo);
         alert.setHeaderText(header);
@@ -98,7 +102,7 @@ public class AlertUtils {
         return alert.showAndWait();
     }
 
-    public static File openFileChooserModeRead(FileChooser.ExtensionFilter filtro, Window window){
+    public static File openFileChooserModeRead(FileChooser.ExtensionFilter filtro, Window window) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Abrir Archivo");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
@@ -106,7 +110,7 @@ public class AlertUtils {
         return fileChooser.showOpenDialog(window);
     }
 
-    public static File openFileChooserModeWrite(FileChooser.ExtensionFilter filtro, Window window){
+    public static File openFileChooserModeWrite(FileChooser.ExtensionFilter filtro, Window window) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Guardar Archivo");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
