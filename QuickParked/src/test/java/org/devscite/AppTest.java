@@ -109,4 +109,30 @@ public class AppTest {
         new Car("123ABC", Calendar.getInstance(), CarModel.Automovil);
         new MotorCycle("A1B2C3", Calendar.getInstance());
     }
+
+    @Test
+    public void uppercaseLicensePlate() throws InvalidLicensePlate {
+        String plate = new Car("abc123", Calendar.getInstance(), CarModel.Automovil).getLicensePlate();
+        assertEquals("ABC123", plate);
+
+        plate = new MotorCycle("abc12a", Calendar.getInstance()).getLicensePlate();
+        assertEquals("ABC12A", plate);
+    }
+
+    @Test
+    public void singletonTest() {
+        ControllerParking controller1 = ControllerParking.getInstance();
+        ControllerParking controller2 = ControllerParking.getInstance();
+        assertEquals(controller1, controller2);
+    }
+
+    @Test
+    public void loginTest() {
+        Employee temp = new Employee("test_user", "test123", "TEST USER",
+                BigDecimal.valueOf(1234567890), BigDecimal.valueOf(987654321));
+        ControllerParking.getInstance().loginUser(temp);
+
+        Employee user = ControllerParking.getInstance().getActualUser();
+        assertEquals(user, temp);
+    }
 }
