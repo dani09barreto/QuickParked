@@ -61,7 +61,7 @@ public class ControllerViewUserRealTime extends RealTimeObservableView implement
                 close(event);
             }
         } catch (InvalidUser e) {
-            AlertUtils.alertError("Error", "No se pudo iniciar sesión contraseña o usuarios invalidos", "(1.3-DEV) - (Requiere VPN) Verifica que estés conectado a la red de la Universidad Javeriana");
+            AlertUtils.alertError("Error", "No se pudo iniciar sesión contraseña o usuarios invalidos", "(Advertencia) - (Requiere VPN) Verifica que estés conectado a la red de la Universidad Javeriana");
             resetLabels();
         } catch (Exception e) {
             e.printStackTrace();
