@@ -1,5 +1,8 @@
 package org.devscite.Entities.Model;
 
+/**
+ * Parking user, may be an Employee or an Administrator
+ */
 public abstract class UserParking {
     protected String username;
     protected String passWord;
@@ -28,8 +31,8 @@ public abstract class UserParking {
     @Override
     public String toString() {
         return "UserParking{" +
-                "username='" + username + '\'' +
-                ", passWord='" + passWord + '\'' +
-                '}';
+                       "username='" + username + '\'' +
+                       ", passWord='" + passWord + '\'' +
+                       '}';
     }
 }

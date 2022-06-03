@@ -10,7 +10,7 @@ import org.devscite.Utils.Exeptions.InvalidUser;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class UserDAOImpl implements IUserDAO{
+public class UserDAOImpl implements IUserDAO {
 
     @Override
     public void addEmployee(Employee employee) {
@@ -21,7 +21,7 @@ public class UserDAOImpl implements IUserDAO{
                 Constants.THINCONN,
                 Constants.USERNAME,
                 Constants.PASSWORD);
-             PreparedStatement ps = conex.prepareStatement(sql);){
+             PreparedStatement ps = conex.prepareStatement(sql);) {
 
             ps.setInt(1, id);
             ps.setBigDecimal(2, employee.getDocument());
@@ -82,8 +82,35 @@ public class UserDAOImpl implements IUserDAO{
     }
 
     @Override
-    public void deleteUser(UserParking userParking) {
+    public void deleteEmployee(Employee employee) {
+        String sql = "DELETE FROM EMPLOYEE WHERE DOCUMENT = ?";
+        try (Connection conex = DriverManager.getConnection(Constants.THINCONN,
+                Constants.USERNAME,
+                Constants.PASSWORD);
+             PreparedStatement ps = conex.prepareStatement(sql);
+        ) {
+            ps.setBigDecimal(1, employee.getDocument());
+            ps.executeUpdate();
+            deleteUser(employee);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
+    @Override
+    public void deleteUser(Employee emp) {
+        String Sql = "DELETE FROM USERPARKING WHERE PASSWORD = ? AND USERNAME = ?";
+        try (Connection conex = DriverManager.getConnection(Constants.THINCONN,
+                Constants.USERNAME,
+                Constants.PASSWORD);
+             PreparedStatement ps = conex.prepareStatement(Sql);
+        ) {
+            ps.setString(1, emp.getPassWord());
+            ps.setString(2, emp.getUsername());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -114,8 +141,8 @@ public class UserDAOImpl implements IUserDAO{
         int registros = 0;
         UserParking userParking = null;
         String SQL = "select USERPARKING.USERNAME, EMPLOYEE.USERID, USERPARKING.PASSWORD, EMPLOYEE.NAME, EMPLOYEE.DOCUMENT, EMPLOYEE.CELLPHONE\n" +
-                             "from USERPARKING, EMPLOYEE\n" +
-                             "where USERPARKING.ID = EMPLOYEE.USERID and USERPARKING.USERNAME = ? and USERPARKING.PASSWORD = ?";
+                "from USERPARKING, EMPLOYEE\n" +
+                "where USERPARKING.ID = EMPLOYEE.USERID and USERPARKING.USERNAME = ? and USERPARKING.PASSWORD = ?";
         try (
                 Connection conex = DriverManager.getConnection(Constants.THINCONN, Constants.USERNAME, Constants.PASSWORD);
                 PreparedStatement ps = conex.prepareStatement(SQL)) {
@@ -125,26 +152,27 @@ public class UserDAOImpl implements IUserDAO{
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     userParking = bulidUsers(rs);
-                    registros ++;
+                    registros++;
                 }
             }
         } catch (SQLException ex) {
             System.out.println("Error de conexion:" + ex);
             ex.printStackTrace();
         }
-        if (registros == 0){
+        if (registros == 0) {
             throw new InvalidUser("no se puede iniciar sesion");
         }
         return userParking;
     }
-    public UserParking bulidUsers (final ResultSet rs) throws SQLException {
+
+    public UserParking bulidUsers(final ResultSet rs) throws SQLException {
         UserParking us;
-        if (rs.getInt("USERID") == 4){
+        if (rs.getInt("USERID") == 4) {
             us = new Admin(
                     rs.getString("USERNAME"),
                     rs.getString("PASSWORD")
             );
-        }else {
+        } else {
             us = new Employee(
                     rs.getString("USERNAME"),
                     rs.getString("PASSWORD"),
@@ -156,7 +184,7 @@ public class UserDAOImpl implements IUserDAO{
         return us;
     }
 
-    public Employee buildEmployee (ResultSet rs) throws SQLException {
+    public Employee buildEmployee(ResultSet rs) throws SQLException {
         return new Employee(
                 rs.getString("USERNAME"),
                 rs.getString("PASSWORD"),

@@ -11,15 +11,29 @@ import org.devscite.Utils.ViewType;
 
 import java.util.Optional;
 
+/**
+ * Makes a class Observable to ViewManagementObserver, implements usefull javafx Windowing methods and
+ * requires an update behaviour overriding with 'onUpdate'
+ */
 public abstract class RealTimeObservableView {
 
     ViewManagementObserver observer = null;
 
+    /**
+     * Subscribe to an Observer
+     *
+     * @param observer Observer to susbcribe to
+     * @param type     Type of view
+     * @throws ViewException View cannot be subscribed because another MASTER or SLAVE_UNIQUE are already subscribed
+     */
     public void subscribe(ViewManagementObserver observer, ViewType type) throws ViewException {
         this.observer = observer;
         this.observer.subscribe(this, type);
     }
 
+    /**
+     * Unsubscribe this view from the Observer
+     */
     public void unsubscribe() {
         this.observer.unsuscribe(this);
         this.observer = null;
@@ -59,6 +73,12 @@ public abstract class RealTimeObservableView {
         ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
     }
 
+    /**
+     * Close the current session
+     *
+     * @param event FXML event
+     * @throws Exception Observer internal error
+     */
     @FXML
     void logOut(ActionEvent event) throws Exception {
         Optional<ButtonType> option = AlertUtils.alertConfirmation("Cerrar Sesion", "¿Esta seguro de que quiere cerrar la Sesion?", "");
